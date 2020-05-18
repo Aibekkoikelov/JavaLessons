@@ -31,10 +31,10 @@ public class Bus extends FuelAuto {
 
     @Override
     public void fuelUp(int petrolVolume) {
-        int volume = getAvailablePetrol()+petrolVolume;
-        if (volume>getTankVolume()) {
-            setAvailablePetrol(getTankVolume());
-        }
+       int volume = getAvailablePetrol()+petrolVolume;
+       if (volume>getTankVolume()) {
+           setAvailablePetrol(getTankVolume());
+       }
         System.out.println("Adding Diesel");
     }
 

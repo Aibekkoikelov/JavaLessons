@@ -1,5 +1,7 @@
 package com.javalessons.Inheritance;
 
+import java.util.List;
+
 public class InheritanceMain {
 
     public static void main(String[] args) {
@@ -24,8 +26,8 @@ public class InheritanceMain {
         auto.start();
         auto.stop();
         if(auto instanceof FuelAuto) {
-            FuelAuto fAuto = (FuelAuto) auto;
-            fAuto.fuelUp(50);
+           FuelAuto fAuto = (FuelAuto) auto;
+           fAuto.fuelUp(50);
         }
     }
 
