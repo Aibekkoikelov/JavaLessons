@@ -1,4 +1,4 @@
-package com.javalessons.Inheritance;
+package main.java.com.javalessons.Inheritance;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ public class Engine {
         this.volume = volume;
         this.engineType = engineType;
         this.power = power;
-        for (int i = 1; i<=5; i++)
+        for (int i = 1; i <= 5; i++)
             this.pistons.add(new Piston(0.3, i));
     }
 

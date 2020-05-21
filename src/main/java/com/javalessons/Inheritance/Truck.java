@@ -1,4 +1,4 @@
-package com.javalessons.Inheritance;
+package main.java.com.javalessons.Inheritance;
 
 public class Truck extends FuelAuto {
 
@@ -25,22 +25,9 @@ public class Truck extends FuelAuto {
         System.out.println("Truck has stopped");
     }
 
+    @Override
+    public void energize() {
+        fuelUp(getTankVolume() - getAvailablePetrol());
 
-
-
-    public int getCargoWeight() {
-        return cargoWeight;
-    }
-
-    public void setCargoWeight(int cargoWeight) {
-        this.cargoWeight = cargoWeight;
-    }
-
-    public void load() {
-        System.out.println("cargo loaded");
-    }
-
-    public void unload() {
-        System.out.println("cargo unloaded");
     }
 }

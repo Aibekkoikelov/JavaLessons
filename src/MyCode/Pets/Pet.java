@@ -1,4 +1,4 @@
-package MyCode;
+package MyCode.Pets;
 
 public class Pet {
     private String name;

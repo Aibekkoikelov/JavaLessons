@@ -1,4 +1,4 @@
-package MyCode;
+package MyCode.Pets;
 
 public enum PetSize {
     SMALL("S"), MEDIUM("S"), BIG("L"), HUGE("XL");

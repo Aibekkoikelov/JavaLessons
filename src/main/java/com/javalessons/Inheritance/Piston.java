@@ -1,4 +1,4 @@
-package com.javalessons.Inheritance;
+package main.java.com.javalessons.Inheritance;
 
 public class Piston {
     private double volume;
@@ -10,7 +10,7 @@ public class Piston {
     }
 
     public void movePiston() {
-        System.out.println("Piston # "+pistonNumber+" moving");
+        System.out.println("Piston # " + pistonNumber + " moving");
     }
 
     @Override

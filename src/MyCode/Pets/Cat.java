@@ -1,4 +1,4 @@
-package MyCode;
+package MyCode.Pets;
 
 public class Cat extends Pet {
     public String name;

@@ -1,4 +1,4 @@
-package com.javalessons.Inheritance;
+package main.java.com.javalessons.Inheritance;
 
 import java.util.List;
 
@@ -11,13 +11,13 @@ public class InheritanceMain {
         Auto bus = new Bus("Mercedes", "Sprinter", busEngine, 50, 70, 12);
         Auto truck = new Truck("Volvo", "VNL 300", truckengine, 300, 500, 1000);
         Auto car = new ElectricCar("Tesla", "Model S", 4, 5);
-        Auto auto = new Auto("MV","Polo",busEngine);
+//      Auto auto = new Auto("VW","Polo",busEngine);
 
 
         runCar(bus);
         runCar(truck);
         runCar(car);
-        runCar(auto);
+//        runCar(auto);
 
 
     }
@@ -25,10 +25,8 @@ public class InheritanceMain {
     private static void runCar(Auto auto) {
         auto.start();
         auto.stop();
-        if(auto instanceof FuelAuto) {
-           FuelAuto fAuto = (FuelAuto) auto;
-           fAuto.fuelUp(50);
-        }
+        auto.energize();
     }
-
 }
+
+

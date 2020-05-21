@@ -1,4 +1,4 @@
-package com.javalessons.Inheritance;
+package main.java.com.javalessons.Inheritance;
 
 public class ElectricCar extends Auto {
 
@@ -11,6 +11,7 @@ public class ElectricCar extends Auto {
         this.passengersNumber = passengersNumber;
 
     }
+
 
     @Override
     public void start() {
@@ -25,8 +26,6 @@ public class ElectricCar extends Auto {
         setCurrentSpeed(0);
         System.out.println("Electric car has stopped");
     }
-
-
 
     public void charge() {
         System.out.println("Battery is charging");
@@ -46,5 +45,10 @@ public class ElectricCar extends Auto {
 
     public void setPassengersNumber(int passengersNumber) {
         this.passengersNumber = passengersNumber;
+    }
+
+    @Override
+    public void energize() {
+        charge();
     }
 }

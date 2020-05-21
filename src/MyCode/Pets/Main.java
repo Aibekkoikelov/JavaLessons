@@ -1,4 +1,4 @@
-package MyCode;
+package MyCode.Pets;
 
 public class Main {
 
@@ -18,7 +18,7 @@ public class Main {
         murka.doATrick();
         murka.meow();
 
-        System.out.println("THere are " + Pet.petCount + " pets");
+        System.out.println("There are " + Pet.petCount + " pets");
 
     }
 
