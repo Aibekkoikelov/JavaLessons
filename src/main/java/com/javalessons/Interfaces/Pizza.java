@@ -1,6 +1,6 @@
 package main.java.com.javalessons.Interfaces;
 
-public class Pizza {
+public class Pizza implements Deliverable{
 
     private String name;
     private int quantity;
@@ -12,6 +12,11 @@ public class Pizza {
         this.quantity = quantity;
         this.price = price;
         this.size = size;
+    }
+
+    @Override
+    public void calcDeliveryPrice() {
+
     }
 
     public String getName() {

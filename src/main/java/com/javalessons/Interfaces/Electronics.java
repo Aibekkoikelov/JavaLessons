@@ -1,6 +1,6 @@
 package main.java.com.javalessons.Interfaces;
 
-public class Electronics {
+public class Electronics implements Deliverable{
 
     private String make;
     private String model;
@@ -28,5 +28,10 @@ public class Electronics {
 
     public int getPrice() {
         return price;
+    }
+
+    @Override
+    public void calcDeliveryPrice() {
+
     }
 }
