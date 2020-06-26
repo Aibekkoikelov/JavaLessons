@@ -1,13 +1,13 @@
 package main.java.com.javalessons.Interfaces;
 
-public class Pizza implements Deliverable{
+public class Pizza implements Pricable {
 
     private String name;
     private int quantity;
-    private double price;
+    private int price;
     private Size size;
 
-    public Pizza(String name, int quantity, double price, Size size) {
+    public Pizza(String name, int quantity, int price, Size size) {
         this.name = name;
         this.quantity = quantity;
         this.price = price;
@@ -15,7 +15,17 @@ public class Pizza implements Deliverable{
     }
 
     @Override
-    public void calcDeliveryPrice() {
+    public int calcOrderPrice() {
+        return quantity * price;
+    }
+
+    @Override
+    public int calcDeliveryPrice() {
+        if(size == Size.XL || quantity > 1)
+            return 0;
+        else {
+            return 7;
+        }
 
     }
 
