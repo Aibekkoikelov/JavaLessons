@@ -6,7 +6,7 @@ public class Display {
     private static final int DISPLAY_WIDTH = 1280;
 
     public Display() {
-        Pixel pixel = new Pixel(10,10,Color.BLUE);
+        Pixel pixel = new Pixel(10,10,Color.BLACK);
 
     }
 
