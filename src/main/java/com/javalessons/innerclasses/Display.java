@@ -1,12 +1,13 @@
-package main.java.com.javalessons.innerclasses;
+package com.javalessons.innerclasses;
 
 public class Display {
 
     private static final int DISPLAY_HEIGHT = 1920;
     private static final int DISPLAY_WIDTH = 1280;
+    private int x = 0;
 
     public Display() {
-        Pixel pixel = new Pixel(10,10,Color.BLACK);
+        Pixel pixel = new Pixel(10, 10, Color.BLACK);
 
     }
 
@@ -17,20 +18,20 @@ public class Display {
 
         private Pixel(int x, int y, Color color) {
 
-            if (x >= 0 && x <= DISPLAY_WIDTH && y >=0 && y <= DISPLAY_HEIGHT) {
+            if (x >= 0 && x <= DISPLAY_WIDTH && y >= 0 && y <= DISPLAY_HEIGHT) {
                 this.x = x;
                 this.y = y;
                 this.color = color;
-                System.out.println("Creating "+color+" x:"+x+" y:"+y);
+                System.out.println("Creating " + color + "pixel at x:" + x + " y:" + y);
             } else {
-                throw new IllegalArgumentException("coordinates x and y should be between 0-"+DISPLAY_WIDTH+" and 0-"+DISPLAY_HEIGHT);
+                throw new IllegalArgumentException("coordinates x and y should be between 0-" + DISPLAY_WIDTH + " and 0-" + DISPLAY_HEIGHT);
             }
         }
     }
 
-    public enum Color {
-        RED, GREEN, BLUE, CYAN, MAGENTA, YELLOW, BLACK
-    }
 
+        public enum Color {
+            RED, GREEN, BLUE, CYAN, MAGENTA, YELLOW, BLACK
+        }
 
 }
