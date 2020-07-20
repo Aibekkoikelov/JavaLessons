@@ -1,4 +1,4 @@
-package com.javalessons.innerclasses;
+package main.java.com.javalessons.innerclasses;
 
 class CellPhone {
 
