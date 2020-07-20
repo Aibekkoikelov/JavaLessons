@@ -1,4 +1,6 @@
 package MyCode.JavaRush;
+// Iterating over arrays
+// The longest ascending sequence (hard)  problem
 
 import java.util.*;
 
@@ -6,28 +8,23 @@ class Main2 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int len = sc.nextInt();
-        int[] a = new int[len];
-        int[] b = new int[len];
+        int[] arr = new int[len];
+        int count = 1;
+        int maxCount = 0;
 
         for (int i = 0; i < len; i++) {
-            a[i] = sc.nextInt();
-        }
-        for (int i = 0; i < len; i++) {
-            b[i] = sc.nextInt();
-        }
-        double tax[] = new double[len];
-
-        int max = 0;
-        for (int i = 0; i < len-2; i++) {
-            tax[i] = a[i] * b[i];
-            if (tax[i] / 100 > tax[i+1] / 100) {
-               max = i;
-            } else max = i+1;
-
+            arr[i] = sc.nextInt();
         }
 
-        System.out.println(max);
-//        System.out.println((a[0]*b[0]) / 100 +" "+ (a[1]*b[1]) / 100);
+        for (int i = 1; i < len; i++) {
+            if (arr[i] > arr[i - 1]) {
+                count++;
+            } else if (count >= maxCount) {
+                maxCount = count;
+                count = 1;
+            } else count = 1;
+                continue;
+        }
+        System.out.println(maxCount);
     }
 }
-
