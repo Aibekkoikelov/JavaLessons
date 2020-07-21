@@ -1,4 +1,4 @@
-package MyCode.JavaRush;
+package MyCode.HyperSkill;
 // Iterating over arrays
 // Alphabetical order (hard)  problem
 
