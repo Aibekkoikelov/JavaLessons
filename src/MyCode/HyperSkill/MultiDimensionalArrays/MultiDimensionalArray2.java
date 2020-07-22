@@ -1,14 +1,15 @@
-package MyCode.HyperSkill;
+package MyCode.HyperSkill.MultiDimensionalArrays;
 
 // Multi-dimensional array
 // Symmetric matrix
 
 import java.util.*;
 
-public class Main7 {
+public class MultiDimensionalArray2 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
+        boolean symmetric = true;
         int[][] arr = new int[n][n];
 
         for (int i = 0; i < n; i++) {
@@ -19,11 +20,14 @@ public class Main7 {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (arr[i][j] != arr[j][i]) {
-                    System.out.println("NO");
-                    return;
+                    symmetric = false;
                 }
             }
         }
-        System.out.println("YES");
+        if (symmetric) {
+            System.out.println("YES");
+        } else {
+            System.out.println("NO");
+        }
     }
 }

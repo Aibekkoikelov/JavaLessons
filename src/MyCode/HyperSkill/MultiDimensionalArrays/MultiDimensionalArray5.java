@@ -1,4 +1,7 @@
-package MyCode.HyperSkill;
+package MyCode.HyperSkill.MultiDimensionalArrays;
+
+//  Multi-dimensional array
+//  The star figure
 
 import java.util.Scanner;
 
@@ -17,15 +20,11 @@ public class MultiDimensionalArray5 {
 //        }
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                if (i == j || (i + j == n - 1) || j == n / 2 || i == n / 2) {
-                    arr[i][j] = '*';
+                if (i == j || i + j == n - 1 || j == n / 2 || i == n / 2) {
+                    System.out.print("* ");
+                } else {
+                    System.out.print(". ");
                 }
-                else {arr[i][j] = '.'; }
-            }
-        }
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                System.out.print(arr[i][j] + " ");
             }
             System.out.println();
         }

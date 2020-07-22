@@ -1,4 +1,7 @@
-package MyCode.HyperSkill;
+package MyCode.HyperSkill.MultiDimensionalArrays;
+
+//  Multi-dimensional array
+//  Swap the columns
 
 import java.util.Scanner;
 

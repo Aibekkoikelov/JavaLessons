@@ -1,11 +1,11 @@
-package MyCode.HyperSkill;
+package MyCode.HyperSkill.MultiDimensionalArrays;
 
 // Multi-dimensional array
 // Pretty looking pattern
 
 import java.util.*;
 
-public class Main8 {
+public class MultiDimensionalArray3 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         char[][] arr = new char[4][4];
@@ -16,9 +16,9 @@ public class Main8 {
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                if (arr[i][j] == arr[i+1][j]
-                && arr[i][j] == arr[i+1][j+1]
-                && arr[i][j] == arr[i][j+1]) {
+                if (arr[i][j] == arr[i + 1][j]
+                        && arr[i][j] == arr[i + 1][j + 1]
+                        && arr[i][j] == arr[i][j + 1]) {
                     System.out.println("NO");
                     return;
                 }
