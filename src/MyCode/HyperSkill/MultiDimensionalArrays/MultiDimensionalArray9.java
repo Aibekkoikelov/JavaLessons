@@ -1,5 +1,8 @@
 package MyCode.HyperSkill.MultiDimensionalArrays;
 
+//  Multi-dimensional array
+//  Cinema
+
 import java.util.Scanner;
 
 public class MultiDimensionalArray9 {
@@ -8,8 +11,9 @@ public class MultiDimensionalArray9 {
         int n = sc.nextInt();
         int m = sc.nextInt();
         int[][] arr = new int[n][m];
-        int count = 0;
+        int count = 1;
         int row = 0;
+
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
@@ -18,20 +22,20 @@ public class MultiDimensionalArray9 {
         }
         int k = sc.nextInt();
 
-        for (int i = 0; i < n && count != k; i++) {
-            for (int j = 0; j < m; j++) {
-                if (arr[i][j] == 0) {
-                    count++;
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m-1; j++) {
+                    if (arr[i][j] == 0 && arr[i][j+1] == 0) {
+                        count++;
+                    } else {
+                        count = 1;
+                    }
+                    if (count == k) {
+                        row = i + 1;
+                        break;
+                    }
                 }
-                if (count == k) {
-                    row = i + 1;
-                    break;
-                }
-                count = 0;
+                count = 1;
             }
-            count = 0;
-        }
         System.out.println(row);
-
     }
 }

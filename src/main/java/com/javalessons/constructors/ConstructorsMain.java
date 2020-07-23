@@ -1,4 +1,4 @@
-package com.javalessons.constructors;
+package main.java.com.javalessons.constructors;
 
 import com.javalessons.domainmodel.Employee;
 
