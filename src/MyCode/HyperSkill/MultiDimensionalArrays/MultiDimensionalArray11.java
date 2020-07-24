@@ -42,30 +42,32 @@ public class MultiDimensionalArray11 {
             break;
         }
 
-//        int k = 0;
-//        while (k < n) {
-//            for (int i = 0; i < n && !crossed; i++) {
-//                for (int j = 0; j < n; j++) {
-//                    if (arr[i][j] == arr[k][j]) {
-//                        crossed = true;
-//                        break;
-//                    }
-//                }
-//            }
-//            k++;
-//        }
-//        k = 0;
-//        while (k < n) {
-//            for (int i = 0; i < n && !crossed; i++) {
-//                for (int j = 0; j < n; j++) {
-//                    if (arr[j][i] == arr[j][k]) {
-//                        crossed = true;
-//                        break;
-//                    }
-//                }
-//            }
-//            k++;
-//        }
+
+
+        int k = 0;
+        while (k < n) {
+            for (int i = 0; i < n && !crossed; i++) {
+                for (int j = k + 1; j < n; j++) {
+                    if (arr[i][j] == arr[i][k]) {
+                        crossed = true;
+                        break;
+                    }
+                }
+            }
+            k++;
+        }
+        k = 0;
+        while (k < n) {
+            for (int i = 0; i < n && !crossed; i++) {
+                for (int j = k + 1; j < n; j++) {
+                    if (arr[j][i] == arr[j][k]) {
+                        crossed = true;
+                        break;
+                    }
+                }
+            }
+            k++;
+        }
 
 //        int sum = 0;
 //        i = 0;
