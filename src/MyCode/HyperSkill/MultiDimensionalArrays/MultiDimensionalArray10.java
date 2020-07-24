@@ -1,5 +1,8 @@
 package MyCode.HyperSkill.MultiDimensionalArrays;
 
+//  Multi-dimensional array
+//  Sum of neighbors
+
 import java.util.Arrays;
 import java.util.Scanner;
 
