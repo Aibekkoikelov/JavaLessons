@@ -2,9 +2,20 @@ package MyCode.HyperSkill;
 
 //import java.util.Scanner;
 
-//public class Main {
-//    public static void main(String[] args) {
+public class Main {
+    public static void main(String[] args) {
+        char a = 'X';
+        char b = ' ';
+        char c = 'O';
+        int a1 = a;
+        int b1 = b;
 
+
+        System.out.println(a + b);
+        System.out.println(a + 0);
+        System.out.println(b + 0);
+        System.out.println(c * 1);
+        System.out.println(a * 1);
 //        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 //        double m = Double.parseDouble(reader.readLine());
 //
@@ -73,5 +84,5 @@ package MyCode.HyperSkill;
 //                System.out.print(area2);
 //                break;
 //        }
-//    }
-//}
+    }
+}
