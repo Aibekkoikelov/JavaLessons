@@ -5,11 +5,11 @@ import java.util.Scanner;
 
 public class TicTacToe {
 
-    private static final int[][] line = new int[][]{
-            {0, 1, 2}, {3, 4, 5}, {6, 7, 8},
-            {0, 3, 6}, {1, 4, 7}, {2, 5, 8},
-            {0, 4, 8}, {6, 4, 2},
-    };
+//    private static final int[][] line = new int[][]{
+//            {0, 1, 2}, {3, 4, 5}, {6, 7, 8},
+//            {0, 3, 6}, {1, 4, 7}, {2, 5, 8},
+//            {0, 4, 8}, {6, 4, 2},
+//    };
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -20,8 +20,8 @@ public class TicTacToe {
         char move = 'X';
 
         printField(field);
-
-        while (true) {
+game:
+        while (!fullField(field)) {
             if (move == 'X') {
                 playerMove(sc, field, move);
                 move = 'O';
@@ -29,14 +29,11 @@ public class TicTacToe {
                 playerMove(sc, field, move);
                 move = 'X';
             }
-//            validateField(field);
-//            gameOver(field);
-            if (gameOver(field) || fullField(field)) {
-                printField(field);
-                break;
-            }
             printField(field);
-            System.out.println(line[0] + line[1] + line[2]);
+//            gameOver(field);
+            if (gameOver(field)) {
+                break game;
+            }
         }
 
 //        GameStatement(threeXs, threeOs, fieldFull);
@@ -69,22 +66,36 @@ public class TicTacToe {
             }
         }
         if (countO + countX == 9) {
-            fieldfull = true;
+            System.out.println("Draw");
+            return true;
         }
-        return fieldfull;
+        return false;
     }
 
-    private static boolean gameOver(char[][]line) {
+    private static boolean gameOver(char[][]field) {
         //todo
-        for (int i = 0; i < 8; i++) {
-            if (line[field[i][0]] + line[i][1] + line[i][2] == 264) {
+        for (int i = 0; i < 3; i++) {
+            if (field[i][0] + field[i][1] + field[i][2] == 264 ||
+                    field[0][i] + field[1][i] + field[2][i] == 264) {
+//                printField(field);
                 System.out.println("X wins");
                 return true;
             }
-            if (line[i][0] + line[i][1] + line[i][2] == 237) {
+            if (field[i][0] + field[i][1] + field[i][2] == 237) {
+//                printField(field);
                 System.out.println("O wins");
                 return true;
             }
+        }
+        if (field[0][0] + field[1][1] + field[2][2] == 264 ||
+                field[0][2] + field[1][1] + field[2][0] == 264) {
+            System.out.println("X wins");
+            return true;
+        }
+        if (field[0][0] + field[1][1] + field[2][2] == 237 ||
+                field[0][2] + field[1][1] + field[2][0] == 237) {
+            System.out.println("O wins");
+            return true;
         }
         return false;
     }
@@ -138,7 +149,4 @@ public class TicTacToe {
         }
         System.out.println("---------");
     }
-
-
-
 }
