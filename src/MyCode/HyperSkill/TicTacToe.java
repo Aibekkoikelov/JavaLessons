@@ -14,6 +14,7 @@ public class TicTacToe {
         char[] line = new char[9];
         Arrays.fill(line, ' ');
         char[][] field = buildField(line);
+        char move = 'X';
 
         printField(field);
 
