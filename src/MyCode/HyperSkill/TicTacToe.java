@@ -19,10 +19,10 @@ public class TicTacToe {
 
         while (!fieldFull) {
             playerMove(sc, field);
-//            validateField(field);
+            validateField(field);
 //            buildField(line);
             printField(field);
-       }
+        }
 
         GameStatement(threeXs, threeOs, fieldFull);
     }
@@ -38,23 +38,26 @@ public class TicTacToe {
         return field;
     }
 
-    private static void validateField(char[][] field) {
+    private static boolean validateField(char[][] field) {
         //todo check that field is correct
-        boolean threeXs = false;
-        boolean threeOs = false;
-        int[][] line = new int[][]{
-                {0, 1, 2}, {3, 4, 5}, {6, 7, 8},
-                {0, 3, 6}, {1, 4, 7}, {2, 5, 8},
-                {0, 4, 8}, {6, 4, 2}
-        };
-        for (int i = 0; i < 8; i++) {
-            if (line[i][0] + line[i][1] + line[i][2] == 264) {
-                threeXs = true;
-            } if (line[i][0] + line[i][1] + line[i][2] == 237) {
-                threeOs = true;
+        int countX = 0;
+        int countO = 0;
+        boolean fieldfull = false;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (field[i][j] == 'X') {
+                    countX++;
+                } else if (field[i][j] == 'O') {
+                    countO++;
+                }
             }
         }
+        if (countO + countX == 9) {
+            fieldfull = true;
+        }
+        return fieldfull;
     }
+
 
     private static void playerMove(Scanner sc, char[][] field) {
         //todo input coordinates
