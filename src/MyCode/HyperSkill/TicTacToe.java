@@ -16,6 +16,7 @@ public class TicTacToe {
         char[][] field = buildField(line);
         char move = 'X';
 
+
         printField(field);
 
         while (!fieldFull) {
