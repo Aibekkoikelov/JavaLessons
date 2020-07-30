@@ -15,6 +15,7 @@ public class Main {
         double result = (double) (((str.length() - str.replaceAll("[g|c]","").length()) / str.length()) * 100);
         System.out.println(result);
     }
+
 }
 
 
