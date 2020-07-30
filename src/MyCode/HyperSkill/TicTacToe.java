@@ -14,13 +14,16 @@ public class TicTacToe {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        char[] line = new char[9];
-        Arrays.fill(line, ' ');
-        char[][] field = buildField(line);
+//        char[] line = new char[9];
+//        Arrays.fill(line, ' ');
+//        char[][] field = buildField(line);
+        char[][] field = new char [3][3];
+        Arrays.stream(field).forEach(a -> Arrays.fill(a, ' '));
+//        Arrays.fill(field,' ');
         char move = 'X';
 
         printField(field);
-game:
+
         while (!fullField(field)) {
             if (move == 'X') {
                 playerMove(sc, field, move);
@@ -32,40 +35,37 @@ game:
             printField(field);
 //            gameOver(field);
             if (gameOver(field)) {
-                break game;
+                break;
             }
         }
 
 //        GameStatement(threeXs, threeOs, fieldFull);
     }
 
-    private static char[][] buildField(char[] line) {
-        //todo convert 1d array to 2d
-        char field[][] = new char[3][3];
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                field[i][j] = line[3 * i + j];
-            }
-        }
-        return field;
-    }
+//    private static char[][] buildField(char[] line) {
+//        //todo convert 1d array to 2d
+//        char field[][] = new char[3][3];
+//        for (int i = 0; i < 3; i++) {
+//            for (int j = 0; j < 3; j++) {
+//                field[i][j] = line[3 * i + j];
+//            }
+//        }
+//        return field;
+//    }
 
     private static boolean fullField (char[][] field) {
         //todo check that field is correct
-        int countX = 0;
-        int countO = 0;
+        int count = 0;
 
         boolean fieldfull = false;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                if (field[i][j] == 'X') {
-                    countX++;
-                } else if (field[i][j] == 'O') {
-                    countO++;
+                if (field[i][j] == 'X' || field[i][j] == 'O') {
+                    count++;
                 }
             }
         }
-        if (countO + countX == 9) {
+        if (count == 9) {
             System.out.println("Draw");
             return true;
         }

@@ -12,7 +12,8 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine().toLowerCase();
-        double result = (double) (((str.length() - str.replaceAll("[g|c]","").length()) / str.length()) * 100);
+        double a = str.replaceAll("[g|c]","").length();
+        double result = (((str.length() - a) / str.length()) * 100);
         System.out.println(result);
     }
 
