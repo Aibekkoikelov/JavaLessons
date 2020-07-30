@@ -1,21 +1,25 @@
 package MyCode.HyperSkill;
 
-//import java.util.Scanner;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        char a = 'X';
-        char b = ' ';
-        char c = 'O';
-        int a1 = a;
-        int b1 = b;
+//        System.out.println(1 / Double.POSITIVE_INFINITY);
+//        System.out.println(1 / Double.NaN);
+//        System.out.println(Double.POSITIVE_INFINITY / 5.0);
+//        System.out.println(Double.POSITIVE_INFINITY + Double.POSITIVE_INFINITY);
+//        System.out.println(Double.NaN - Double.NaN);
+
+        Scanner sc = new Scanner(System.in);
+        String str = sc.nextLine().toLowerCase();
+        double result = (double) (((str.length() - str.replaceAll("[g|c]","").length()) / str.length()) * 100);
+        System.out.println(result);
+    }
+}
 
 
-        System.out.println(a + b);
-        System.out.println(a + 0);
-        System.out.println(b + 0);
-        System.out.println(c * 1);
-        System.out.println(a * 1);
+
+//
 //        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 //        double m = Double.parseDouble(reader.readLine());
 //
@@ -84,5 +88,5 @@ public class Main {
 //                System.out.print(area2);
 //                break;
 //        }
-    }
-}
+//    }
+//}
