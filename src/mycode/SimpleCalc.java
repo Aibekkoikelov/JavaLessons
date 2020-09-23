@@ -22,7 +22,7 @@ public class SimpleCalc {
                 } catch (EmptyStackException e) {
                     System.out.println("куда ты лезешь, укурок? нет столько чисел");
                     printStack(stack);
-//                    break;
+                    break;
                 }
             printStack(stack);
         }
