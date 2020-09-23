@@ -1,4 +1,4 @@
-package mycode.hyperskill;
+package mycode.hyperskill.algorithms;
 
 import java.util.Scanner;
 
