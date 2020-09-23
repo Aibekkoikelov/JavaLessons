@@ -18,31 +18,31 @@ public class SimpleCalc {
             for (String s : inputLine)
                 switch (s) {
                     case "+":
-                        sum(stack);
 //                        newStack.push(stack);
+                        sum(stack);
                         break;
                     case "-":
-                        subtraction(stack);
 //                        newStack.push(stack);
+                        subtraction(stack);
                         break;
                     case "*":
-                        multiply(stack);
 //                        newStack.push(stack);
+                        multiply(stack);
                         break;
                     case "/":
-                        division(stack);
 //                        newStack.push(stack);
+                        division(stack);
                         break;
                     case "sqrt":
+//                        newStack.push(addToStackHistory(stack));
                         squareRoot(stack);
-//                        newStack.push(stack);
                         break;
                     case "undo":
                         stack = undoOperation(newStack);
                         break;
                     case "clear":
+                        newStack.push(stack);
                         stack.clear();
-//                        newStack.push(stack);
                         break;
                     default:
                         addToStack(newStack, stack, s);
@@ -55,7 +55,7 @@ public class SimpleCalc {
         try {
             double number = Integer.parseInt(a);
             stack.push(number);
-            newStack.push(stack);
+            newStack.push(addToStackHistory(stack));
         } catch (NumberFormatException e) {
             System.out.println("чо ты ввёл , пёс?");
         }
@@ -109,6 +109,12 @@ public class SimpleCalc {
 
     public static Stack<Double> undoOperation(Stack<Stack<Double>> newStack) {
         return newStack.peek();
+    }
+
+    public static Stack<Double> addToStackHistory(Stack<Double> stack) {
+        Stack<Double> tempStack = new Stack<>();
+        tempStack.addAll(stack);
+        return tempStack;
     }
 
     public static void printStack(Stack<Double> stack) {
