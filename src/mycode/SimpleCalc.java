@@ -7,10 +7,11 @@ import java.math.BigDecimal;
 import java.util.*;
 
 public class SimpleCalc {
+    private static Stack<Double> stack = new Stack<>();
+    private static Stack<Stack<Double>> newStack = new Stack<>();
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        Stack<Double> stack = new Stack<>();
-        Stack<Stack<Double>> newStack = new Stack<>();
+
         while (true) {
 
             String input = reader.readLine();
@@ -41,21 +42,22 @@ public class SimpleCalc {
                         stack = undoOperation(newStack);
                         break;
                     case "clear":
-                        newStack.push(stack);
+//                        newStack.push(addToStackHistory(stack));
                         stack.clear();
                         break;
                     default:
-                        addToStack(newStack, stack, s);
+                        addToStackHistory(stack);
+                        addToStack(stack, s);
                 }
             printStack(stack);
         }
     }
 
-    public static void addToStack(Stack<Stack<Double>> newStack, Stack<Double> stack, String a) {
+    public static void addToStack(Stack<Double> stack, String a) {
         try {
             double number = Integer.parseInt(a);
             stack.push(number);
-            newStack.push(addToStackHistory(stack));
+
         } catch (NumberFormatException e) {
             System.out.println("чо ты ввёл , пёс?");
         }
@@ -111,10 +113,10 @@ public class SimpleCalc {
         return newStack.peek();
     }
 
-    public static Stack<Double> addToStackHistory(Stack<Double> stack) {
+    public static void addToStackHistory(Stack<Double> stack) {
         Stack<Double> tempStack = new Stack<>();
         tempStack.addAll(stack);
-        return tempStack;
+        newStack.add(tempStack);
     }
 
     public static void printStack(Stack<Double> stack) {
