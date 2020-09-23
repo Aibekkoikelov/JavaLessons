@@ -19,30 +19,30 @@ public class SimpleCalc {
                 switch (s) {
                     case "+":
                         sum(stack);
-                        newStack.push(stack);
+//                        newStack.push(stack);
                         break;
                     case "-":
                         subtraction(stack);
-                        newStack.push(stack);
+//                        newStack.push(stack);
                         break;
                     case "*":
                         multiply(stack);
-                        newStack.push(stack);
+//                        newStack.push(stack);
                         break;
                     case "/":
                         division(stack);
-                        newStack.push(stack);
+//                        newStack.push(stack);
                         break;
                     case "sqrt":
                         squareRoot(stack);
-                        newStack.push(stack);
+//                        newStack.push(stack);
                         break;
                     case "undo":
-                        stack = (undoOperation(newStack));
+                        stack = undoOperation(newStack);
                         break;
                     case "clear":
                         stack.clear();
-                        newStack.push(stack);
+//                        newStack.push(stack);
                         break;
                     default:
                         addToStack(newStack, stack, s);
@@ -59,6 +59,7 @@ public class SimpleCalc {
         } catch (NumberFormatException e) {
             System.out.println("чо ты ввёл , пёс?");
         }
+
     }
 
     public static void sum(Stack<Double> stack) {
@@ -106,13 +107,13 @@ public class SimpleCalc {
         }
     }
 
+    public static Stack<Double> undoOperation(Stack<Stack<Double>> newStack) {
+        return newStack.peek();
+    }
+
     public static void printStack(Stack<Double> stack) {
         for (Double d : stack) {
             System.out.printf(BigDecimal.valueOf(d).stripTrailingZeros().toPlainString() + " ");
         }
-    }
-
-    public static Stack<Double> undoOperation(Stack<Stack<Double>> newStack) {
-        return newStack.pop();
     }
 }

@@ -1,21 +1,18 @@
 package mycode.hyperskill;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int sum = 0;
-        for (int i = 1; i <= n; i++) {
-            while (sum <= n) {
-                System.out.print(i + " ");
-                sum+=i;
-            }
+        List<String> strList = Arrays.asList("one", "two", "three");
+        for (int i = 1; i < strList.size(); i++) {
+            strList.remove(i);
         }
+        System.out.println(strList.size());
     }
 }
-
 
 
 //        System.out.println(1 / Double.POSITIVE_INFINITY);
