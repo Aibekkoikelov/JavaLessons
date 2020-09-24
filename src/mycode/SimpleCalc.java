@@ -8,7 +8,7 @@ import java.util.*;
 
 public class SimpleCalc {
     private static Stack<Double> stack = new Stack<>();
-    private static Stack<Stack<Double>> newStack = new Stack<>();
+    private static Stack<Stack<Double>> history = new Stack<>();
 
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -23,7 +23,11 @@ public class SimpleCalc {
                     calc(s);
                 } catch (EmptyStackException e) {
                     System.out.println("operator " + s + " (position: " + (index * 2 - 1) + ") insucient parameters");
-                    stack = undoOperation(newStack);
+                    stack = undoOperation(history);
+                    break;
+                } catch (NumberFormatException e) {
+                    System.out.println("Input is not a number or operator");
+                    stack = undoOperation(history);
                     break;
                 }
             printStack(stack);
@@ -34,26 +38,26 @@ public class SimpleCalc {
         switch (s) {
             case "+":
                 addToStackHistory(stack);
-                sum(stack);
+                sum();
                 break;
             case "-":
                 addToStackHistory(stack);
-                subtraction(stack);
+                subtraction();
                 break;
             case "*":
                 addToStackHistory(stack);
-                multiply(stack);
+                multiply();
                 break;
             case "/":
                 addToStackHistory(stack);
-                division(stack);
+                division();
                 break;
             case "sqrt":
                 addToStackHistory(stack);
-                squareRoot(stack);
+                squareRoot();
                 break;
             case "undo":
-                stack = undoOperation(newStack);
+                stack = undoOperation(history);
                 break;
             case "clear":
                 addToStackHistory(stack);
@@ -66,33 +70,37 @@ public class SimpleCalc {
     }
 
     public static void addToStack(Stack<Double> stack, String a) {
-        double number = Integer.parseInt(a);
+        double number = Double.parseDouble(a);
         stack.push(number);
     }
 
-    public static void sum(Stack<Double> stack) {
+    public static void sum() {
             stack.push(stack.pop() + stack.pop());
     }
 
-    public static void subtraction(Stack<Double> stack) {
+    public static void subtraction() {
             double n1 = stack.pop();
             double n2 = stack.pop();
             stack.push(n2 - n1);
     }
 
-    public static void multiply(Stack<Double> stack) {
+    public static void multiply() {
             stack.push(stack.pop() * stack.pop());
     }
 
-    public static void division(Stack<Double> stack) {
+    public static void division() {
+        if (stack.peek() != 0) {
             double n1 = stack.pop();
             double n2 = stack.pop();
             stack.push(n2 / n1);
+        } else System.out.println("Division by 0");
     }
 
-    public static void squareRoot(Stack<Double> stack) {
-        double n = Math.sqrt(stack.pop());
-        stack.push(n);
+    public static void squareRoot() {
+        if (stack.peek() > 0) {
+            double n = Math.sqrt(stack.pop());
+            stack.push(n);
+        } else System.out.println("Cant calc square root of negative number");
     }
 
     public static Stack<Double> undoOperation(Stack<Stack<Double>> newStack) {
@@ -102,7 +110,7 @@ public class SimpleCalc {
     public static void addToStackHistory(Stack<Double> stack) {
         Stack<Double> tempStack = new Stack<>();
         tempStack.addAll(stack);
-        newStack.push(tempStack);
+        history.push(tempStack);
     }
 
     public static void printStack(Stack<Double> stack) {
