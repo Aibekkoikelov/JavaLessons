@@ -23,48 +23,48 @@ public class SimpleCalc {
                     calc(s);
                 } catch (EmptyStackException e) {
                     System.out.println("operator " + s + " (position: " + (index * 2 - 1) + ") insucient parameters");
-                    stack = undoOperation(history);
+                    stack = undoOperation();
                     break;
                 } catch (NumberFormatException e) {
                     System.out.println("Input is not a number or operator");
-                    stack = undoOperation(history);
+                    stack = undoOperation();
                     break;
                 }
-            printStack(stack);
+            printStack();
         }
     }
 
     public static void calc(String s) {
         switch (s) {
             case "+":
-                addToStackHistory(stack);
+                addToStackHistory();
                 sum();
                 break;
             case "-":
-                addToStackHistory(stack);
+                addToStackHistory();
                 subtraction();
                 break;
             case "*":
-                addToStackHistory(stack);
+                addToStackHistory();
                 multiply();
                 break;
             case "/":
-                addToStackHistory(stack);
+                addToStackHistory();
                 division();
                 break;
             case "sqrt":
-                addToStackHistory(stack);
+                addToStackHistory();
                 squareRoot();
                 break;
             case "undo":
-                stack = undoOperation(history);
+                stack = undoOperation();
                 break;
             case "clear":
-                addToStackHistory(stack);
+                addToStackHistory();
                 stack.clear();
                 break;
             default:
-                addToStackHistory(stack);
+                addToStackHistory();
                 addToStack(stack, s);
         }
     }
@@ -97,23 +97,23 @@ public class SimpleCalc {
     }
 
     public static void squareRoot() {
-        if (stack.peek() > 0) {
+        if (stack.peek() >= 0) {
             double n = Math.sqrt(stack.pop());
             stack.push(n);
         } else System.out.println("Cant calc square root of negative number");
     }
 
-    public static Stack<Double> undoOperation(Stack<Stack<Double>> newStack) {
-        return newStack.pop();
+    public static Stack<Double> undoOperation() {
+        return history.pop();
     }
 
-    public static void addToStackHistory(Stack<Double> stack) {
+    public static void addToStackHistory() {
         Stack<Double> tempStack = new Stack<>();
         tempStack.addAll(stack);
         history.push(tempStack);
     }
 
-    public static void printStack(Stack<Double> stack) {
+    public static void printStack() {
         System.out.print("stack: ");
         for (Double d : stack) {
             System.out.printf(BigDecimal.valueOf(d).stripTrailingZeros().toPlainString() + " ");
