@@ -14,14 +14,16 @@ public class SimpleCalc {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
+            int index = 0;
             String input = reader.readLine();
             String[] inputLine = input.trim().split("\\s+");
             for (String s : inputLine)
                 try {
+                    index++;
                     calc(s);
                 } catch (EmptyStackException e) {
-                    System.out.println("куда ты лезешь, укурок? нет столько чисел");
-                    printStack(stack);
+                    System.out.println("operator " + s + " (position: " + (index * 2 - 1) + ") insucient parameters");
+                    stack = undoOperation(newStack);
                     break;
                 }
             printStack(stack);
@@ -64,30 +66,28 @@ public class SimpleCalc {
     }
 
     public static void addToStack(Stack<Double> stack, String a) {
-
         double number = Integer.parseInt(a);
         stack.push(number);
     }
 
     public static void sum(Stack<Double> stack) {
-        stack.push(stack.pop() + stack.pop());
-
+            stack.push(stack.pop() + stack.pop());
     }
 
     public static void subtraction(Stack<Double> stack) {
-        double n1 = stack.pop();
-        double n2 = stack.pop();
-        stack.push(n2 - n1);
+            double n1 = stack.pop();
+            double n2 = stack.pop();
+            stack.push(n2 - n1);
     }
 
     public static void multiply(Stack<Double> stack) {
-        stack.push(stack.pop() * stack.pop());
+            stack.push(stack.pop() * stack.pop());
     }
 
     public static void division(Stack<Double> stack) {
-        double n1 = stack.pop();
-        double n2 = stack.pop();
-        stack.push(n2 / n1);
+            double n1 = stack.pop();
+            double n2 = stack.pop();
+            stack.push(n2 / n1);
     }
 
     public static void squareRoot(Stack<Double> stack) {
@@ -106,6 +106,7 @@ public class SimpleCalc {
     }
 
     public static void printStack(Stack<Double> stack) {
+        System.out.print("stack: ");
         for (Double d : stack) {
             System.out.printf(BigDecimal.valueOf(d).stripTrailingZeros().toPlainString() + " ");
         }
