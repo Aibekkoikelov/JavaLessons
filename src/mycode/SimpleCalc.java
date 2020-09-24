@@ -65,11 +65,11 @@ public class SimpleCalc {
                 break;
             default:
                 addToStackHistory();
-                addToStack(stack, s);
+                addToStack(s);
         }
     }
 
-    public static void addToStack(Stack<Double> stack, String a) {
+    public static void addToStack(String a) {
         double number = Double.parseDouble(a);
         stack.push(number);
     }
