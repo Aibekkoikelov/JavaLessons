@@ -4,13 +4,21 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class Main {
+public class Main extends BaseClass implements BaseInterface {
     public static void main(String[] args) {
-        List<String> strList = Arrays.asList("one", "two", "three");
-        for (int i = 1; i < strList.size(); i++) {
-            strList.remove(i);
-        }
-        System.out.println(strList.size());
+ Main main = new Main();
+ main.say();
+    }
+}
+
+class BaseClass {
+    public void say() {
+        System.out.println("Base class");
+    }
+}
+interface BaseInterface {
+    default void say() {
+        System.out.println("Base interface");
     }
 }
 
