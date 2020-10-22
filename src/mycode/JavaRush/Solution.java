@@ -14,6 +14,7 @@ CRUD 2
 public class Solution {
     public static volatile List<Person> allPeople = new ArrayList<Person>();
     public static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+    public static SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
 
     static {
         allPeople.add(Person.createMale("Иванов Иван", new Date()));  //сегодня родился    id=0
@@ -75,13 +76,14 @@ public class Solution {
         Date date = formatter.parse(strList[index + 3]);
         if (strList[index + 2].equals("м")) {
             allPeople.set(id, Person.createMale(strList[index + 1], date));
-        } else allPeople.set(id, Person.createFemale(strList[index + 1], date));
+        } else {
+            allPeople.set(id, Person.createFemale(strList[index + 1], date));
+        }
     }
 
     public static void deletePerson(String[] strList) {
-        Person person;
         for (int i = 1; i < strList.length; i++) {
-            person = allPeople.get(i);
+            Person person = allPeople.get(i);
             person.setName(null);
             person.setBirthDate(null);
             person.setSex(null);
@@ -95,7 +97,7 @@ public class Solution {
     }
 
     public static String personToString(Person person) {
-        String newDate = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH).format(person.getBirthDate());
+        String newDate = dateFormatter.format(person.getBirthDate());
         return person.getName() + " " + (person.getSex() == Sex.MALE ? "м" : "ж") + " " + newDate;
     }
 }
