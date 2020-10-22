@@ -27,31 +27,22 @@ public class Solution {
         switch (args[0]) {
             case "-c":
                 synchronized (allPeople) {
-                    for (int i = 0; i < createIndex; i++) {
-                        createPerson(args, i);
-                    }
+                    createPerson(args);
                 }
-                    break;
-
+                break;
             case "-u":
                 synchronized (allPeople) {
-                    for (int i = 0; i < updateIndex; i++) {
-                        updatePerson(args, i);
-                    }
+                    updatePerson(args);
                 }
                 break;
             case "-d":
                 synchronized (allPeople) {
-                    for (int i = 0; i < args.length - 1; i++) {
-                        deletePerson(args, i);
-                    }
+                    deletePerson(args);
                 }
                 break;
             case "-i":
                 synchronized (allPeople) {
-                    for (int i = 0; i < args.length - 1; i++) {
-                        printInfo(args, i);
-                    }
+                    printInfo(args);
                 }
                 break;
 //            default:
@@ -59,40 +50,56 @@ public class Solution {
         }
 
 
-
     }
 
-    public static void createPerson(String[] strList, int index) throws ParseException {
-        Date date = formatter.parse(strList[3 + (index * 3)]);
-        if (strList[2 + (index * 3)].equals("м")) {
-            Person person = Person.createMale(strList[1 + (index * 3)], date);
-            allPeople.add(person);
-            System.out.println(allPeople.indexOf(person));
-        } else {
-            Person person = Person.createFemale(strList[1 + (index * 3)], date);
-            allPeople.add(person);
-            System.out.println(allPeople.indexOf(person));
+    public static void createPerson(String[] strList) throws ParseException {
+        for (int i = 1; i < strList.length; i = i + 3) {
+            addPerson(strList, i);
         }
     }
 
-    public static void updatePerson(String[] strList, int index) throws ParseException {
-        int id = Integer.parseInt(strList[1 + (index * 4)]);
-        Date date = formatter.parse(strList[4 + (index * 4)]);
-        if (strList[3 + (index * 4)].equals("м")) {
-            allPeople.set(id, Person.createMale(strList[2 + (index * 4)], date));
-        } else allPeople.set(id, Person.createFemale(strList[2 + (index * 4)], date));
+    public static void addPerson(String[] strList, int index) throws ParseException {
+        Date date = formatter.parse(strList[index + 2]);
+        Person person;
+        if (strList[index + 1].equals("м")) {
+            person = Person.createMale(strList[index], date);
+        } else {
+            person = Person.createFemale(strList[index], date);
+        }
+        allPeople.add(person);
+        System.out.println(allPeople.indexOf(person));
     }
 
-    public static void deletePerson(String[] strList, int deleteIndex) {
-        int index = Integer.parseInt(strList[1 + deleteIndex]);
-        Person person = allPeople.get(index);
-        person.setName(null);
-        person.setBirthDate(null);
-        person.setSex(null);
+
+    public static void updatePerson(String[] strList) throws ParseException {
+        for (int i = 1; i < strList.length; i = i + 4) {
+            replacePersonData(strList, i);
+        }
     }
 
-    public static void printInfo(String[] strList, int index) {
-        System.out.println(personToString(allPeople.get(Integer.parseInt(strList[1 + index]))));
+    public static void replacePersonData (String[] strList, int index) throws ParseException {
+        int id = Integer.parseInt(strList[index]);
+        Date date = formatter.parse(strList[index + 3]);
+        if (strList[index + 2].equals("м")) {
+            allPeople.set(id, Person.createMale(strList[index + 1], date));
+        } else allPeople.set(id, Person.createFemale(strList[index + 1], date));
+    }
+
+
+    public static void deletePerson(String[] strList) {
+        Person person;
+        for (int i = 1; i < strList.length; i++) {
+            person = allPeople.get(i);
+            person.setName(null);
+            person.setBirthDate(null);
+            person.setSex(null);
+        }
+    }
+
+    public static void printInfo(String[] strList) {
+        for (int i = 1; i < strList.length; i++) {
+            System.out.println(personToString(allPeople.get(Integer.parseInt(strList[i]))));
+        }
     }
 
     public static String personToString(Person person) {
