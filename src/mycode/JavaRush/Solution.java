@@ -21,8 +21,6 @@ public class Solution {
     }
 
     public static void main(String[] args) throws ParseException {
-        int createIndex = (args.length - 1) / 3;
-        int updateIndex = (args.length - 1) / 4;
 
         switch (args[0]) {
             case "-c":
