@@ -43,11 +43,7 @@ public class Solution {
                     printInfo(args);
                 }
                 break;
-//            default:
-//                break;
         }
-
-
     }
 
     public static void createPerson(String[] strList) throws ParseException {
@@ -68,7 +64,6 @@ public class Solution {
         System.out.println(allPeople.indexOf(person));
     }
 
-
     public static void updatePerson(String[] strList) throws ParseException {
         for (int i = 1; i < strList.length; i = i + 4) {
             replacePersonData(strList, i);
@@ -82,7 +77,6 @@ public class Solution {
             allPeople.set(id, Person.createMale(strList[index + 1], date));
         } else allPeople.set(id, Person.createFemale(strList[index + 1], date));
     }
-
 
     public static void deletePerson(String[] strList) {
         Person person;
