@@ -106,6 +106,4 @@ public class Solution {
         String newDate = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH).format(person.getBirthDate());
         return person.getName() + " " + (person.getSex() == Sex.MALE ? "м" : "ж") + " " + newDate;
     }
-
-
 }
