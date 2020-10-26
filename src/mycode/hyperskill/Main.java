@@ -6,11 +6,11 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        List<String> strList = Arrays.asList("one", "two", "three");
-        for (int i = 1; i < strList.size(); i++) {
-            strList.remove(i);
-        }
-        System.out.println(strList.size());
+int a = 5;
+int b = 2;
+b = a;
+        System.out.println(b);
+        System.out.println(a);
     }
 }
 
