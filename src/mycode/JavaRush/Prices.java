@@ -1,7 +1,12 @@
 package mycode.JavaRush;
 
 import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
     /*
@@ -25,7 +30,7 @@ public class Prices {
     }
 
     private static void addData(String[] args, String fileName) throws IOException {
-        int id = getId(fileName) + 1;
+        int id = getMaxId(fileName) + 1;
         List<String> list = new ArrayList<>();
         list.add(formatString(Integer.toString(id), 8));
         list.add(formatString(args[1], 30));
@@ -56,30 +61,24 @@ public class Prices {
         return str;
     }
 
-    private static int getId(String fileName) throws IOException {
-        BufferedReader input = new BufferedReader(new FileReader(fileName));
-        FileInputStream inputStream = new FileInputStream(fileName);
-        if (inputStream.available() == 0) {
-            return 0;
-        }
-
-        int id = 0;
-        int maxID = 0;
-        String idString = "";
-        String line;
-        while ((line = input.readLine()) != null) {
-            try {
-                idString = line.substring(0, 8).trim();
-                id = Integer.parseInt(idString);
-                if (id > maxID) {
-                    maxID = id;
-                }
-            } catch (NumberFormatException e) {
-//            e.printStackTrace();
-            }
-        }
-        input.close();
-        inputStream.close();
-        return maxID;
+    private static int getMaxId(String fileName) throws IOException {
+        List<String> lines = Files.readAllLines(Paths.get(fileName), Charset.defaultCharset());
+        List<Integer> ids = convert(lines);
+        return maxId(ids);
     }
+
+    private static List<Integer> convert(List<String> lines) {
+        List<Integer> listOfInts = new ArrayList<>();
+        for (String s : lines) {
+            String idString = s.substring(0, 8).trim();
+            listOfInts.add(Integer.parseInt(idString));
+        }
+        return listOfInts;
+    }
+
+    private static int maxId(List<Integer> ids) {
+        Collections.sort(ids);
+        return ids.get(ids.size() - 1);
+    }
+
 }
