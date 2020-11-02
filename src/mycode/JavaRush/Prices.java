@@ -33,7 +33,8 @@ public class Prices {
         line += formatString(args[2], 8);
         line += formatString(args[3], 4);
 
-        System.out.println(line);
+        String strings =  "hkhd";
+        System.out.println(String.format("%-1$." + 10 +  "s", strings));
 
         writeToFile(line, fileName);
     }
@@ -52,7 +53,7 @@ public class Prices {
         if (str.length() > len) {
             return str.substring(0, min);
         } else if (str.length() < len) {
-            return String.format("%-" + len + "s", str);
+            return String.format("%1$-" + len + "s", str);
         } else {
             return str;
         }
