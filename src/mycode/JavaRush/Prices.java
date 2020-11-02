@@ -66,7 +66,7 @@ public class Prices {
     private static int getMaxId(String fileName) throws IOException {
         List<String> lines = Files.readAllLines(Paths.get(fileName), Charset.defaultCharset());
         List<Integer> ids = convert(lines);
-        return maxId(ids);
+        return Collections.max(ids);
     }
 
     private static List<Integer> convert(List<String> lines) {
@@ -76,10 +76,5 @@ public class Prices {
             listOfInts.add(Integer.parseInt(idString));
         }
         return listOfInts;
-    }
-
-    private static int maxId(List<Integer> ids) {
-        Collections.sort(ids);
-        return ids.get(ids.size() - 1);
     }
 }
