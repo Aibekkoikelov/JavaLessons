@@ -39,7 +39,7 @@ public class Prices {
 
         FileWriter fileWriter = new FileWriter(fileName, true);
         BufferedWriter bw = new BufferedWriter(fileWriter);
-        bw.write("\n");
+        bw.newLine();
         for (String s : list) {
             bw.write(s);
         }
@@ -58,15 +58,12 @@ public class Prices {
     }
 
     private static int getId(String fileName) throws IOException {
-
+        BufferedReader input = new BufferedReader(new FileReader(fileName));
         FileInputStream inputStream = new FileInputStream(fileName);
         if (inputStream.available() == 0) {
             return 0;
         }
-        return findMaxId(fileName);
-    }
-    private static int findMaxId(String fileName) throws IOException {
-        BufferedReader input = new BufferedReader(new FileReader(fileName));
+
         int id = 0;
         int maxID = 0;
         String idString = "";
@@ -82,7 +79,8 @@ public class Prices {
 //            e.printStackTrace();
             }
         }
+        input.close();
+        inputStream.close();
         return maxID;
     }
-
 }
