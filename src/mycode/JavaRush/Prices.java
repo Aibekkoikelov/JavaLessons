@@ -58,8 +58,9 @@ public class Prices {
             return str.substring(0, min);
         } else if (str.length() < len) {
             return String.format("%-" + len + "s", str);
+        } else {
+            return str;
         }
-        return str;
     }
 
     private static int getMaxId(String fileName) throws IOException {
@@ -81,5 +82,4 @@ public class Prices {
         Collections.sort(ids);
         return ids.get(ids.size() - 1);
     }
-
 }
