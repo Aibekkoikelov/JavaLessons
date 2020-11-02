@@ -27,6 +27,7 @@ public class Prices {
                     break;
             }
         }
+        reader.close();
     }
 
     private static void addData(String[] args, String fileName) throws IOException {
