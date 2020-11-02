@@ -24,7 +24,7 @@ public class Prices {
         }
     }
 
-    public static void addData(String[] args, String fileName) throws IOException {
+    private static void addData(String[] args, String fileName) throws IOException {
         int id = findId(fileName) + 1;
         List<String> list = new ArrayList<>();
         list.add(formatString(Integer.toString(id), 8));
@@ -35,7 +35,7 @@ public class Prices {
         writeToFile(list, fileName);
     }
 
-    public static void writeToFile(List<String> list, String fileName) throws IOException {
+    private static void writeToFile(List<String> list, String fileName) throws IOException {
 
         FileWriter fileWriter = new FileWriter(fileName, true);
         BufferedWriter bw = new BufferedWriter(fileWriter);
@@ -46,7 +46,7 @@ public class Prices {
         bw.close();
     }
 
-    public static String formatString(String str, int len) {
+    private static String formatString(String str, int len) {
         if (str.length() > len) {
             str = str.substring(0, Math.min(str.length(), len));
             return str;
@@ -57,7 +57,7 @@ public class Prices {
         return str;
     }
 
-    public static int findId(String fileName) throws IOException {
+    private static int findId(String fileName) throws IOException {
         BufferedReader input = new BufferedReader(new FileReader(fileName));
         FileInputStream inputStream = new FileInputStream(fileName);
         int id = 0;
