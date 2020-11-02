@@ -25,7 +25,7 @@ public class Prices {
     }
 
     private static void addData(String[] args, String fileName) throws IOException {
-        int id = findId(fileName) + 1;
+        int id = getId(fileName) + 1;
         List<String> list = new ArrayList<>();
         list.add(formatString(Integer.toString(id), 8));
         list.add(formatString(args[1], 30));
@@ -57,27 +57,32 @@ public class Prices {
         return str;
     }
 
-    private static int findId(String fileName) throws IOException {
-        BufferedReader input = new BufferedReader(new FileReader(fileName));
+    private static int getId(String fileName) throws IOException {
+
         FileInputStream inputStream = new FileInputStream(fileName);
-        int id = 0;
         if (inputStream.available() == 0) {
-            return id;
+            return 0;
         }
-        String idString = "";
-        String last = "";
-        String line;
-
-        while ((line = input.readLine()) != null) {
-            last = line;
-        }
-
-        try {
-            idString = last.substring(0, 8).trim();
-            id = Integer.parseInt(idString);
-        } catch (NumberFormatException e) {
-//            e.printStackTrace();
-        }
-        return id;
+        return findMaxId(fileName);
     }
+    private static int findMaxId(String fileName) throws IOException {
+        BufferedReader input = new BufferedReader(new FileReader(fileName));
+        int id = 0;
+        int maxID = 0;
+        String idString = "";
+        String line;
+        while ((line = input.readLine()) != null) {
+            try {
+                idString = line.substring(0, 8).trim();
+                id = Integer.parseInt(idString);
+                if (id > maxID) {
+                    maxID = id;
+                }
+            } catch (NumberFormatException e) {
+//            e.printStackTrace();
+            }
+        }
+        return maxID;
+    }
+
 }
