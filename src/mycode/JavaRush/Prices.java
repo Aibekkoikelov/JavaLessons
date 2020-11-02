@@ -14,30 +14,31 @@ public class Prices {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String file = reader.readLine();
 
-//        String str = "1";
-//        int len = 8;
-//        System.out.println(String.format("%-" + len + "s", str));
-
-        switch (args[0]) {
-            case "-c":
-                addData(args, file);
-            default:
-                break;
+        if (args.length > 0) {
+            switch (args[0]) {
+                case "-c":
+                    addData(args, file);
+                default:
+                    break;
+            }
         }
     }
 
     public static void addData(String[] args, String fileName) throws IOException {
         int id = findId(fileName) + 1;
-//        String strID = String.format("%-8s", id);
-
-        FileWriter fileWritter = new FileWriter(fileName,true);
-        BufferedWriter bw = new BufferedWriter(fileWritter);
         List<String> list = new ArrayList<>();
         list.add(formatString(Integer.toString(id), 8));
         list.add(formatString(args[1], 30));
         list.add(formatString(args[2], 8));
         list.add(formatString(args[3], 4));
 
+        writeToFile(list, fileName);
+    }
+
+    public static void writeToFile(List<String> list, String fileName) throws IOException {
+
+        FileWriter fileWriter = new FileWriter(fileName, true);
+        BufferedWriter bw = new BufferedWriter(fileWriter);
         bw.write("\n");
         for (String s : list) {
             bw.write(s);
@@ -59,13 +60,14 @@ public class Prices {
     public static int findId(String fileName) throws IOException {
         BufferedReader input = new BufferedReader(new FileReader(fileName));
         FileInputStream inputStream = new FileInputStream(fileName);
+        int id = 0;
         if (inputStream.available() == 0) {
-            return 0;
+            return id;
         }
         String idString = "";
         String last = "";
         String line;
-        int id = 0;
+
         while ((line = input.readLine()) != null) {
             last = line;
         }
