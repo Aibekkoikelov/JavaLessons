@@ -26,23 +26,24 @@ public class Prices {
 
     private static void addData(String[] args, String fileName) throws IOException {
         int id = getMaxId(fileName) + 1;
-        List<String> list = new ArrayList<>();
-        list.add(formatString(Integer.toString(id), 8));
-        list.add(formatString(args[1], 30));
-        list.add(formatString(args[2], 8));
-        list.add(formatString(args[3], 4));
+        String line = "";
 
-        writeToFile(list, fileName);
+        line += formatString(Integer.toString(id), 8);
+        line += formatString(args[1], 30);
+        line += formatString(args[2], 8);
+        line += formatString(args[3], 4);
+
+        System.out.println(line);
+
+        writeToFile(line, fileName);
     }
 
-    private static void writeToFile(List<String> list, String fileName) throws IOException {
+    private static void writeToFile(String line, String fileName) throws IOException {
 
         FileWriter fileWriter = new FileWriter(fileName, true);
         BufferedWriter bw = new BufferedWriter(fileWriter);
         bw.newLine();
-        for (String s : list) {
-            bw.write(s);
-        }
+        bw.write(line);
         bw.close();
     }
 
