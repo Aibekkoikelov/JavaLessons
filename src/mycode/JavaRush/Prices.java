@@ -47,12 +47,11 @@ public class Prices {
     }
 
     private static String formatString(String str, int len) {
+        int min = Math.min(str.length(), len);
         if (str.length() > len) {
-            str = str.substring(0, Math.min(str.length(), len));
-            return str;
+            return str.substring(0, min);
         } else if (str.length() < len) {
-            str = String.format("%-" + len + "s", str);
-            return str;
+            return String.format("%-" + len + "s", str);
         }
         return str;
     }
