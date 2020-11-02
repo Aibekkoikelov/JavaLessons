@@ -2,7 +2,6 @@ package mycode.JavaRush;
 
 import java.io.*;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -16,18 +15,13 @@ import java.util.List;
 public class Prices {
 
     public static void main(String[] args) throws Exception {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String file = reader.readLine();
 
         if (args.length > 0) {
-            switch (args[0]) {
-                case "-c":
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            String file = reader.readLine();
                     addData(args, file);
-                default:
-                    break;
-            }
+            reader.close();
         }
-        reader.close();
     }
 
     private static void addData(String[] args, String fileName) throws IOException {
