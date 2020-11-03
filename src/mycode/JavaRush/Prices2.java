@@ -47,11 +47,9 @@ public class Prices2 {
 
     private static void changeFile(String[] args, String fileName) throws IOException {
         List<String> lines = Files.readAllLines(Paths.get(fileName), Charset.defaultCharset());
-        String oldString = "";
         int index = 0;
         for (String s : lines) {
             if (s.startsWith(args[1])) {
-                oldString = s;
                 index = lines.indexOf(s);
             }
         }
@@ -59,46 +57,18 @@ public class Prices2 {
             Collections.replaceAll(lines, lines.get(index), getLine(args));
         } else {
             lines.remove(index);
-            }
-        clearFile(fileName);
-        updateFile(lines, fileName);
         }
-
-//        public static void replaceLine (String[] args, String oldString, String fileName) throws IOException {
-//        BufferedReader reader = new BufferedReader(new FileReader(fileName));
-//        String line = reader.readLine();
-//        String oldContent = "";
-//        while (line != null) {
-//            oldContent = oldContent + line + System.lineSeparator();
-//            line = reader.readLine();
-//        }
-//
-//        String newString = getLine(args);
-//        String newContent = oldContent.replaceAll(oldString, newString);
-//        FileWriter writer = new FileWriter(fileName);
-//        writer.write(newContent);
-//        reader.close();
-//        writer.close();
-//    }
-
-    public  static void clearFile (String fileName) throws FileNotFoundException {
-//        try {
-//            FileWriter fstream1 = new FileWriter(fileName);// конструктор с одним параметром - для перезаписи
-//            BufferedWriter out1 = new BufferedWriter(fstream1); //  создаём буферезированный поток
-//            out1.write(""); // очищаем, перезаписав поверх пустую строку
-//            out1.close(); // закрываем
-//        } catch (Exception e)
-//        {System.err.println("Error in file cleaning: " + e.getMessage());}
-        new PrintWriter(fileName).close();
+        updateFile(lines, fileName);
     }
 
-    public static void updateFile (List<String> list, String fileName) throws IOException {
-        FileWriter fileWriter = new FileWriter(fileName, true);
+    public static void updateFile(List<String> list, String fileName) throws IOException {
+        FileWriter fileWriter = new FileWriter(fileName, false);
         BufferedWriter bw = new BufferedWriter(fileWriter);
-        for (String s : list) {
+        for (int i = 0; i < list.size() - 1; i++) {
+            bw.write(list.get(i));
             bw.newLine();
-            bw.write(s);
         }
+        bw.write(list.get(list.size() - 1));
         bw.close();
     }
 }
