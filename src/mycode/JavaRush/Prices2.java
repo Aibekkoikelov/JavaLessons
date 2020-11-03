@@ -16,11 +16,11 @@ public class Prices2 {
     public static void main(String[] args) throws Exception {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String file = reader.readLine();
-
+        reader.close();
         if (args.length > 0) {
             changeFile(args, file);
         }
-        reader.close();
+
     }
 
     private static String getLine(String[] args) throws IOException {
