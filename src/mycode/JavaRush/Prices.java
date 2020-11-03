@@ -33,9 +33,6 @@ public class Prices {
         line += formatString(args[2], 8);
         line += formatString(args[3], 4);
 
-        String strings =  "hkhd";
-        System.out.println(String.format("%-1$." + 10 +  "s", strings));
-
         writeToFile(line, fileName);
     }
 
