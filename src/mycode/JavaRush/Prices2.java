@@ -20,6 +20,7 @@ public class Prices2 {
         if (args.length > 0) {
             changeFile(args, file);
         }
+        reader.close();
     }
 
     private static String getLine(String[] args) throws IOException {
@@ -69,6 +70,7 @@ public class Prices2 {
         }
         bw.write(list.get(list.size() - 1));
         bw.close();
+        fileWriter.close();
     }
 }
 
