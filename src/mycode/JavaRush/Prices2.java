@@ -49,12 +49,13 @@ public class Prices2 {
         List<String> lines = Files.readAllLines(Paths.get(fileName), Charset.defaultCharset());
         int index = 0;
         for (String s : lines) {
-            if (s.startsWith(args[1])) {
+            if (s.substring(0,8).trim().equals(args[1])) {
                 index = lines.indexOf(s);
             }
         }
         if (args[0].equals("-u")) {
-            Collections.replaceAll(lines, lines.get(index), getLine(args));
+//            Collections.replaceAll(lines, lines.get(index), getLine(args));
+            lines.set(index, getLine(args));
         } else {
             lines.remove(index);
         }
@@ -62,15 +63,13 @@ public class Prices2 {
     }
 
     public static void updateFile(List<String> list, String fileName) throws IOException {
-        FileWriter fileWriter = new FileWriter(fileName, false);
-        BufferedWriter bw = new BufferedWriter(fileWriter);
+        BufferedWriter bw = new BufferedWriter(new FileWriter(fileName, false));
         for (int i = 0; i < list.size() - 1; i++) {
             bw.write(list.get(i));
             bw.newLine();
         }
         bw.write(list.get(list.size() - 1));
         bw.close();
-        fileWriter.close();
     }
 }
 
