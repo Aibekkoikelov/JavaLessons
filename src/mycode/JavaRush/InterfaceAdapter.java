@@ -11,6 +11,9 @@ public class InterfaceAdapter {
     public static Map<String, String> countries = new HashMap<String, String>();
 
     static {
+        countries.put("UA", "Ukraine");
+        countries.put("RU", "Russia");
+        countries.put("CA", "Canada");
 
     }
 
@@ -18,7 +21,7 @@ public class InterfaceAdapter {
 
     }
 
-    public static class IncomeDataAdapter implements Customer, Contact{
+    public static class IncomeDataAdapter implements Customer, Contact {
         private IncomeData data;
 
         public IncomeDataAdapter(IncomeData data) {
@@ -27,25 +30,28 @@ public class InterfaceAdapter {
 
         @Override
         public String getCompanyName() {
-            return null;
+            return data.getCompany();
         }
 
         @Override
         public String getCountryName() {
-            return null;
+            return countries.get(data.getCountryCode());
         }
 
         @Override
         public String getName() {
-            return null;
+            return data.getContactLastName() + ", " + data.getContactFirstName();
         }
 
         @Override
         public String getPhoneNumber() {
-            return null;
+            
+            String number = String.format("%010d", data.getPhoneNumber());
+            String numberToPrint = number.replaceFirst("(\\d+)(\\d{3})(\\d{2})(\\d{2})", "($1)$2-$3-$4");
+            return "+" + data.getCountryPhoneCode() + numberToPrint;
         }
-    }
 
+    }
 
     public static interface IncomeData {
         String getCountryCode();        //For example: UA
