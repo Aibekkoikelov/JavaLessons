@@ -45,7 +45,7 @@ public class InterfaceAdapter {
 
         @Override
         public String getPhoneNumber() {
-            
+
             String number = String.format("%010d", data.getPhoneNumber());
             String numberToPrint = number.replaceFirst("(\\d+)(\\d{3})(\\d{2})(\\d{2})", "($1)$2-$3-$4");
             return "+" + data.getCountryPhoneCode() + numberToPrint;
