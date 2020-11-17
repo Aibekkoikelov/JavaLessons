@@ -34,7 +34,7 @@ public class StupidTags {
     }
 
 
-    public static void findTags(String line, String tag) {
+    public static List<Tag> findTags(String line, String tag) {
 
         Pattern pattern = Pattern.compile("</?" + tag + ".*?>");
         Matcher matcher = pattern.matcher(line);
@@ -45,6 +45,7 @@ public class StupidTags {
             System.out.println(fag.tag(line));
             list.add(fag);
         }
+        return list;
 
 //        Pattern patternOT = Pattern.compile("<" + tag + "(.*?)>");
 //        Pattern patternCT = Pattern.compile("</" + tag + ">");
