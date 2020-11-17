@@ -39,7 +39,7 @@ public class StupidTags {
 
         while (matcher.find()) {
             Tag fag = new Tag(matcher.start(), matcher.end(), line);
-            System.out.println(fag.value);
+//            System.out.println(fag.value);
             list.add(fag);
         }
         return list;
@@ -55,11 +55,13 @@ public class StupidTags {
                 if (stack.size() > 1) {
                     stack.pop();
                 } else {
-                    stack.pop();
+                    System.out.println(stack.pop());
+                    System.out.println(t);
+                    break;
                 }
             }
         }
-
+        return null;
     }
 
     static class Tag {
