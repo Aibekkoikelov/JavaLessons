@@ -41,8 +41,8 @@ public class StupidTags {
         List<Tag> list = new ArrayList<>();
 
         while (matcher.find()) {
-            Tag fag = new Tag(matcher.start(), matcher.end());
-            System.out.println(fag.tag(line));
+            Tag fag = new Tag(matcher.start(), matcher.end(), line);
+            System.out.println(fag.value);
             list.add(fag);
         }
         return list;
