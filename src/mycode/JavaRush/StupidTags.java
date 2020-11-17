@@ -91,6 +91,8 @@ public class StupidTags {
             this.end = end;
         }
         public List<Tag> findTags(String line, String tag) {
+            Pattern pattern = Pattern.compile("</?" + tag + ".*?>");
+
             List<Tag> list = new ArrayList<>();
             return list;
         }
