@@ -90,7 +90,7 @@ public class StupidTags {
             this.start = start;
             this.end = end;
         }
-        public static List<Tag> findTags(String line, String tag) {
+        public List<Tag> findTags(String line, String tag) {
             List<Tag> list = new ArrayList<>();
             return list;
         }
