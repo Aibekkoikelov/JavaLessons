@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,7 +15,7 @@ public class StupidTags {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String file = reader.readLine();
         String line = fileToLine(file);
-        System.out.println(line);
+//        System.out.println(line);
 //        printTags(line, tag);
         findTags(line, args[0]);
     }
@@ -32,7 +33,7 @@ public class StupidTags {
 
 
     public static void findTags(String line, String tag) {
-        Pattern patternOT = Pattern.compile("<" + tag + ".*>");
+        Pattern patternOT = Pattern.compile("<" + tag + "(.*?)>");
         Pattern patternCT = Pattern.compile("</" + tag + ">");
 
         Matcher matcherOT = patternOT.matcher(line);
@@ -42,17 +43,22 @@ public class StupidTags {
         Stack<Integer> stackCloseTag = new Stack<>();
 
         while (true) {
-            if (line.contains(patternOT.toString())) {
+            if (matcherOT.find()) {
                 stackOpenTag.push(matcherOT.start());
+                System.out.println("found open tag");
             }
-            if (line.contains(patternCT.toString())) {
+            if (matcherCT.find()) {
                 stackCloseTag.push(matcherCT.end());
-                if (stackOpenTag.size() == stackCloseTag.size()) {
-                    break;
-                }
+                System.out.println("found closed tag");
+//                if (stackOpenTag.size() == stackCloseTag.size()) {
+//                    break;
+//                }
+            }
+            if (stackCloseTag.size() == 4) {
+                break;
             }
         }
-        System.out.println(line.substring(stackOpenTag.pop(), stackCloseTag.pop()));
+        System.out.println(stackOpenTag.toString());
     }
 
 
