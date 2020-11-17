@@ -58,6 +58,7 @@ public class StupidTags {
 
         private int start;
         private int end;
+
         String value;
 
         public Tag(int start, int end, String line) {
@@ -66,13 +67,8 @@ public class StupidTags {
             this.value = line.substring(start, end);
         }
 
-
-        public String tag(String line) {
-            return line.substring(start, end);
-        }
-
         public boolean isClosing() {
-
+            return value.startsWith("</");
         }
 
     }
