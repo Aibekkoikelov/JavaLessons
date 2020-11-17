@@ -82,4 +82,23 @@ public class StupidTags {
         }
     }
 
+        static class Tag {
+        private int start;
+        private int end;
+
+        public Tag(int start, int end) {
+            this.start = start;
+            this.end = end;
+        }
+        public static List<Tag> findTags(String line, String tag) {
+            List<Tag> list = new ArrayList<>();
+            return list;
+        }
+
+        public String tag(String line) {
+            return line.substring(start, end);
+        }
+
+    }
+
 }
