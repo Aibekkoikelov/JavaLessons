@@ -50,7 +50,8 @@ public class StupidTags {
 
     }
 
-        static class Tag {
+    static class Tag {
+
         private int start;
         private int end;
 
