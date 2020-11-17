@@ -34,7 +34,7 @@ public class CompareLines {
 
         @Override
         public String toString() {
-            return this.type.toString() + this.line;
+            return this.type.toString() + this.line + "\n";
         }
     }
 

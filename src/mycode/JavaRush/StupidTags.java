@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -39,26 +41,33 @@ public class StupidTags {
         Matcher matcherOT = patternOT.matcher(line);
         Matcher matcherCT = patternCT.matcher(line);
 
-        Stack<Integer> stackOpenTag = new Stack<>();
-        Stack<Integer> stackCloseTag = new Stack<>();
+//        Stack<Integer> stackOpenTag = new Stack<>();
+//        Stack<Integer> stackCloseTag = new Stack<>();
+        List<Integer> listOne = new ArrayList<>();
+        List<Integer> listTwo = new ArrayList<>();
 
-        while (true) {
-            if (matcherOT.find()) {
-                stackOpenTag.push(matcherOT.start());
-                System.out.println("found open tag");
-            }
-            if (matcherCT.find()) {
-                stackCloseTag.push(matcherCT.end());
-                System.out.println("found closed tag");
-//                if (stackOpenTag.size() == stackCloseTag.size()) {
-//                    break;
-//                }
-            }
-            if (stackCloseTag.size() == 4) {
-                break;
-            }
+        while (matcherOT.find()) {
+//            stackOpenTag.push(matcherOT.start());
+            listOne.add(matcherOT.start());
+            System.out.println("found open tag");
         }
-        System.out.println(stackOpenTag.toString());
+
+        while (matcherCT.find()) {
+//            stackCloseTag.push(matcherCT.end());
+            listTwo.add(matcherCT.end());
+            System.out.println("found closed tag");
+        }
+
+
+        System.out.println(listOne.toString());
+        System.out.println(listTwo.toString());
+//        System.out.println(stackOpenTag.toString());
+//        System.out.println(stackCloseTag.toString());
+
+        System.out.println(line.substring(listOne.get(0), listTwo.get(1)));
+        System.out.println(line.substring(listOne.get(1), listTwo.get(0)));
+        System.out.println(line.substring(listOne.get(2), listTwo.get(2)));
+        System.out.println(line.substring(listOne.get(3), listTwo.get(3)));
     }
 
 
@@ -70,7 +79,7 @@ public class StupidTags {
         Matcher matcher = pattern.matcher(line);
         while (matcher.find()) {
             System.out.println(matcher.group(0));
-
         }
     }
+
 }
