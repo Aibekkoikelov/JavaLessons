@@ -37,6 +37,12 @@ public class StupidTags {
     public static void findTags(String line, String tag) {
 
         Pattern pattern = Pattern.compile("</?" + tag + ".*?>");
+        Matcher matcher = pattern.matcher(line);
+
+        while (matcher.find()) {
+            new Tag(matcher.start(), matcher.end());
+        }
+
 //        Pattern patternOT = Pattern.compile("<" + tag + "(.*?)>");
 //        Pattern patternCT = Pattern.compile("</" + tag + ">");
 //
