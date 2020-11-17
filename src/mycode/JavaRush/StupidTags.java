@@ -47,8 +47,8 @@ public class StupidTags {
     }
 
     public static String findFirstTag(String line, List<Tag> tags) {
-        Stack<Tag> taggs = new Stack<>();
-        for (Tag t : taggs) {
+        Stack<Tag> stack = new Stack<>();
+        for (Tag t : tags) {
 
         }
     }
