@@ -35,39 +35,41 @@ public class StupidTags {
 
 
     public static void findTags(String line, String tag) {
-        Pattern patternOT = Pattern.compile("<" + tag + "(.*?)>");
-        Pattern patternCT = Pattern.compile("</" + tag + ">");
 
-        Matcher matcherOT = patternOT.matcher(line);
-        Matcher matcherCT = patternCT.matcher(line);
+        Pattern pattern = Pattern.compile("</?" + tag + ".*?>");
+//        Pattern patternOT = Pattern.compile("<" + tag + "(.*?)>");
+//        Pattern patternCT = Pattern.compile("</" + tag + ">");
+//
+//        Matcher matcherOT = patternOT.matcher(line);
+//        Matcher matcherCT = patternCT.matcher(line);
 
 //        Stack<Integer> stackOpenTag = new Stack<>();
 //        Stack<Integer> stackCloseTag = new Stack<>();
-        List<Integer> listOne = new ArrayList<>();
-        List<Integer> listTwo = new ArrayList<>();
+//        List<Integer> listOne = new ArrayList<>();
+//        List<Integer> listTwo = new ArrayList<>();
 
-        while (matcherOT.find()) {
+//        while (matcherOT.find()) {
 //            stackOpenTag.push(matcherOT.start());
-            listOne.add(matcherOT.start());
-            System.out.println("found open tag");
-        }
+//            listOne.add(matcherOT.start());
+//            System.out.println("found open tag");
+//        }
 
-        while (matcherCT.find()) {
+//        while (matcherCT.find()) {
 //            stackCloseTag.push(matcherCT.end());
-            listTwo.add(matcherCT.end());
-            System.out.println("found closed tag");
-        }
+//            listTwo.add(matcherCT.end());
+//            System.out.println("found closed tag");
+//        }
 
 
-        System.out.println(listOne.toString());
-        System.out.println(listTwo.toString());
+//        System.out.println(listOne.toString());
+//        System.out.println(listTwo.toString());
 //        System.out.println(stackOpenTag.toString());
 //        System.out.println(stackCloseTag.toString());
 
-        System.out.println(line.substring(listOne.get(0), listTwo.get(1)));
-        System.out.println(line.substring(listOne.get(1), listTwo.get(0)));
-        System.out.println(line.substring(listOne.get(2), listTwo.get(2)));
-        System.out.println(line.substring(listOne.get(3), listTwo.get(3)));
+//        System.out.println(line.substring(listOne.get(0), listTwo.get(1)));
+//        System.out.println(line.substring(listOne.get(1), listTwo.get(0)));
+//        System.out.println(line.substring(listOne.get(2), listTwo.get(2)));
+//        System.out.println(line.substring(listOne.get(3), listTwo.get(3)));
     }
 
 
@@ -91,7 +93,6 @@ public class StupidTags {
             this.end = end;
         }
         public List<Tag> findTags(String line, String tag) {
-            Pattern pattern = Pattern.compile("</?" + tag + ".*?>");
 
             List<Tag> list = new ArrayList<>();
             return list;
