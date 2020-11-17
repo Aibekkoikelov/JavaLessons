@@ -47,6 +47,27 @@ public class StupidTags {
         }
         return list;
 
+
+    }
+
+        static class Tag {
+        private int start;
+        private int end;
+
+        public Tag(int start, int end) {
+            this.start = start;
+            this.end = end;
+        }
+
+        public String tag(String line) {
+            return line.substring(start, end);
+        }
+
+    }
+
+}
+
+
 //        Pattern patternOT = Pattern.compile("<" + tag + "(.*?)>");
 //        Pattern patternCT = Pattern.compile("</" + tag + ">");
 //
@@ -80,38 +101,3 @@ public class StupidTags {
 //        System.out.println(line.substring(listOne.get(1), listTwo.get(0)));
 //        System.out.println(line.substring(listOne.get(2), listTwo.get(2)));
 //        System.out.println(line.substring(listOne.get(3), listTwo.get(3)));
-    }
-
-
-    public static void printTags(String line, String tag) {
-        Pattern pattern = Pattern.compile("<" + tag + "([\\s\\S]*)/" + tag + ">");
-//        Pattern pattern = Pattern.compile("<span>([\\s\\S]*)</span>");
-
-//        Pattern pattern = Pattern.compile("(\\<(/?[^\\>]+)\\>)");
-        Matcher matcher = pattern.matcher(line);
-        while (matcher.find()) {
-            System.out.println(matcher.group(0));
-        }
-    }
-
-        static class Tag {
-        private int start;
-        private int end;
-
-        public Tag(int start, int end) {
-            this.start = start;
-            this.end = end;
-        }
-        public List<Tag> findTags(String line, String tag) {
-
-            List<Tag> list = new ArrayList<>();
-            return list;
-        }
-
-        public String tag(String line) {
-            return line.substring(start, end);
-        }
-
-    }
-
-}
