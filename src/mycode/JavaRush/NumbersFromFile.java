@@ -11,6 +11,8 @@ public class NumbersFromFile {
         String file2 = reader.readLine();
         reader.close();
         String line = readFile(file1);
+//        String newLine = line.replaceAll("^\\d+ | \\d+ | \\d+$" , "");
+//        System.out.println(newLine);
         List<String> list = findDigits(line);
         writeFile(list, file2);
     }
