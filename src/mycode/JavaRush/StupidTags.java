@@ -47,6 +47,10 @@ public class StupidTags {
         }
         return list;
 
+    }
+
+    public static String findFirstTag(String line, List<Tag> tags) {
+
 
     }
 
@@ -54,14 +58,21 @@ public class StupidTags {
 
         private int start;
         private int end;
+        String value;
 
-        public Tag(int start, int end) {
+        public Tag(int start, int end, String line) {
             this.start = start;
             this.end = end;
+            this.value = line.substring(start, end);
         }
+
 
         public String tag(String line) {
             return line.substring(start, end);
+        }
+
+        public boolean isClosing() {
+
         }
 
     }
