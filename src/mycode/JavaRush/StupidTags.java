@@ -51,10 +51,15 @@ public class StupidTags {
         for (Tag t : tags) {
             if (!t.isClosing()) {
                 stack.push(t);
-            } else if (stack.size() > 1){
-                stack.pop();
+            } else {
+                if (stack.size() > 1) {
+                    stack.pop();
+                } else {
+                    System.out.println(line.substring(stack.pop(), t));
+                }
             }
         }
+
     }
 
     static class Tag {
