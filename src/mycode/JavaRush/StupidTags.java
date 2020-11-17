@@ -49,7 +49,7 @@ public class StupidTags {
     public static String findFirstTag(String line, List<Tag> tags) {
         Stack<Tag> stack = new Stack<>();
         for (Tag t : tags) {
-            if (!t.toString().startsWith("</")) {
+            if (!t.isClosing()) {
                 stack.push(t);
             } else if (stack.size() > 1){
                 stack.pop();
