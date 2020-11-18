@@ -10,19 +10,16 @@ import java.util.regex.Pattern;
 
 public class StupidTags {
     public static void main(String[] args) throws IOException {
-        String tag = args[0];
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String file = reader.readLine();
+        reader.close();
         String line = fileToLine(file);
-//        System.out.println(line);
-//        printTags(line, tag);
         List<Tag> list = findTags(line, args[0]);
         List<TagValue> taglist = findFirstTag(line, list);
         Collections.sort(taglist);
         for (TagValue t : taglist) {
-            System.out.println(t.toString());
+            System.out.println(t.value);
         }
-
     }
 
     public static String fileToLine(String fileName) throws IOException {
@@ -97,7 +94,7 @@ public class StupidTags {
 
         @Override
         public int compareTo(TagValue o) {
-            return start;
+           return Integer.compare(start, o.start);
         }
     }
 }
