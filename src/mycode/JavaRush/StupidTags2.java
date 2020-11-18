@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StupidTags {
+public class StupidTags2 {
     public static void main(String[] args) throws IOException {
         String tag = args[0];
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -16,8 +16,8 @@ public class StupidTags {
         String line = fileToLine(file);
 //        System.out.println(line);
 //        printTags(line, tag);
-        List<Tag> list = findTags(line, args[0]);
-        findFirstTag(line, list);
+        findTags(line, args[0]);
+
 
     }
 
@@ -32,58 +32,50 @@ public class StupidTags {
         return sb.toString();
     }
 
-
-    public static List<Tag> findTags(String line, String tag) {
-
+    public static void findTags(String line, String tag) {
+        Pattern patternOT = Pattern.compile("<" + tag + "(.*?)>");
+        Pattern patternCT = Pattern.compile("</" + tag + ">");
         Pattern pattern = Pattern.compile("</?" + tag + ".*?>");
+
+//        Matcher matcherOT = patternOT.matcher(line);
+//        Matcher matcherCT = patternCT.matcher(line);
         Matcher matcher = pattern.matcher(line);
-        List<Tag> list = new ArrayList<>();
+
+
+        List<Integer> listOne = new ArrayList<>();
+        List<Integer> listTwo = new ArrayList<>();
+
+
+//        while (matcherOT.find()) {
+//            listOne.add(matcherOT.start());
+//            System.out.println("found open tag");
+//        }
+//
+//        while (matcherCT.find()) {
+//            listTwo.add(matcherCT.end());
+//            System.out.println("found closed tag");
+//        }
+
+        int count = 0;
+        int indexStart = 0;
+        int indexEnd = 0;
 
         while (matcher.find()) {
-            Tag fag = new Tag(matcher.start(), matcher.end(), line);
-//            System.out.println(fag.value);
-            list.add(fag);
-        }
-        return list;
-    }
-
-    public static String findFirstTag(String line, List<Tag> tags) {
-        Stack<Tag> stack = new Stack<>();
-        for (Tag t : tags) {
-            if (!t.isClosing()) {
-                stack.push(t);
+            if (matcher.group(0).contains("<" + tag)) {
+                listOne.add(matcher.start());
+                count++;
             } else {
-                if (stack.size() > 1) {
-                    stack.pop();
+                if (matcher.group(0).contains("</" + tag) && count == 1) {
+                    System.out.println(line.substring(listOne.get(0), matcher.end()));
+                    listOne.remove(0);
+                    count--;
                 } else {
-                    System.out.println(stack.pop().value);
-                    System.out.println(t.value);
-                    break;
+                    count--;
+                    listTwo.add(matcher.end());
                 }
             }
         }
-        return null;
     }
-
-    static class Tag {
-
-        private int start;
-        private int end;
-
-        String value;
-
-        public Tag(int start, int end, String line) {
-            this.start = start;
-            this.end = end;
-            this.value = line.substring(start, end);
-        }
-
-        public boolean isClosing() {
-            return value.startsWith("</");
-        }
-
-    }
-
 }
 
 
