@@ -57,8 +57,7 @@ public class StupidTags2 {
 //        }
 
         int count = 0;
-        int indexStart = 0;
-        int indexEnd = 0;
+
 
         while (matcher.find()) {
             if (matcher.group(0).contains("<" + tag)) {
@@ -69,7 +68,7 @@ public class StupidTags2 {
                     System.out.println(line.substring(listOne.get(0), matcher.end()));
                     listOne.remove(0);
                     count--;
-                } else {
+                } else if (){
                     count--;
                     listTwo.add(matcher.end());
                 }

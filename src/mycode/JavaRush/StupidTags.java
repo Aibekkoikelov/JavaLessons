@@ -47,22 +47,24 @@ public class StupidTags {
         return list;
     }
 
-    public static String findFirstTag(String line, List<Tag> tags) {
+    public static void findFirstTag(String line, List<Tag> tags) {
         Stack<Tag> stack = new Stack<>();
         for (Tag t : tags) {
             if (!t.isClosing()) {
                 stack.push(t);
             } else {
-                if (stack.size() > 1) {
-                    stack.pop();
-                } else {
-                    System.out.println(stack.pop().value);
-                    System.out.println(t.value);
-                    break;
-                }
+//                if (stack.size() > 1) {
+//                    stack.pop();
+                    System.out.println(line.substring(stack.pop().start, t.end));
+//                } else {
+////                    System.out.println(stack.pop().value);
+////                    System.out.println(t.value);
+//                    System.out.println(line.substring(stack.pop().start, t.end));
+//                    break;
+//                }
             }
+
         }
-        return null;
     }
 
     static class Tag {
@@ -82,6 +84,16 @@ public class StupidTags {
             return value.startsWith("</");
         }
 
+    }
+
+    static class TagValue {
+        private int start;
+        private String value;
+
+        public TagValue(int start, String value) {
+            this.start = start;
+            this.value = value;
+        }
     }
 
 }
