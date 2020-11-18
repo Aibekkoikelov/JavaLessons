@@ -36,24 +36,17 @@ public class StupidTags2 {
         Pattern pattern = Pattern.compile("</?" + tag + ".*?>");
         Matcher matcher = pattern.matcher(line);
 
-        List<Integer> listOne = new ArrayList<>();
-        Stack<Integer> stack = new Stack<>();
-
-        int count = 0;
+        Queue<Integer> openTag = new LinkedList<>();
+        Stack<Integer> closeTag = new Stack<>();
 
         while (matcher.find()) {
             if (matcher.group(0).contains("<" + tag)) {
-                listOne.add(matcher.start());
-                count++;
-            } else {
-                if (matcher.group(0).contains("</" + tag) && count == 1) {
-                    System.out.println(line.substring(listOne.get(0), matcher.end()));
-                    listOne.remove(0);
-                    count--;
-                } else if (count > 1){
-                    count--;
-                    stack.push(matcher.end());
-                }
+                openTag.offer(matcher.start());
+            } else if (matcher.group(0).contains("</" + tag)) {
+                closeTag.push(matcher.end());
+            }
+            if (openTag.size() == closeTag.size()) {
+                System.out.println(line.substring(openTag.poll(), closeTag.pop()));
             }
         }
     }
