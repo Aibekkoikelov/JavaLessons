@@ -43,8 +43,8 @@ public class StupidTags2 {
 
 
         List<Integer> listOne = new ArrayList<>();
-        List<Integer> listTwo = new ArrayList<>();
-
+//        List<Integer> listTwo = new ArrayList<>();
+        Stack<Integer> stack;
 
 //        while (matcherOT.find()) {
 //            listOne.add(matcherOT.start());
@@ -68,9 +68,9 @@ public class StupidTags2 {
                     System.out.println(line.substring(listOne.get(0), matcher.end()));
                     listOne.remove(0);
                     count--;
-                } else if (){
+                } else if (count > 1){
                     count--;
-                    listTwo.add(matcher.end());
+//                    listTwo.add(matcher.end());
                 }
             }
         }

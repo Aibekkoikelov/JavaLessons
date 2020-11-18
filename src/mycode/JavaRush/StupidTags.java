@@ -17,7 +17,11 @@ public class StupidTags {
 //        System.out.println(line);
 //        printTags(line, tag);
         List<Tag> list = findTags(line, args[0]);
-        findFirstTag(line, list);
+        List<TagValue> taglist = findFirstTag(line, list);
+        Collections.sort(taglist);
+        for (TagValue t : taglist) {
+            System.out.println(t.toString());
+        }
 
     }
 
@@ -47,24 +51,20 @@ public class StupidTags {
         return list;
     }
 
-    public static void findFirstTag(String line, List<Tag> tags) {
+
+    public static List<TagValue> findFirstTag(String line, List<Tag> tags) {
         Stack<Tag> stack = new Stack<>();
+        List<TagValue> values = new ArrayList<>();
         for (Tag t : tags) {
             if (!t.isClosing()) {
                 stack.push(t);
             } else {
-//                if (stack.size() > 1) {
-//                    stack.pop();
-                    System.out.println(line.substring(stack.pop().start, t.end));
-//                } else {
-////                    System.out.println(stack.pop().value);
-////                    System.out.println(t.value);
-//                    System.out.println(line.substring(stack.pop().start, t.end));
-//                    break;
-//                }
+                Tag start = stack.pop();
+                String value = line.substring(start.start, t.end);
+                values.add(new TagValue(start.start, value));
             }
-
         }
+        return values;
     }
 
     static class Tag {
@@ -83,10 +83,9 @@ public class StupidTags {
         public boolean isClosing() {
             return value.startsWith("</");
         }
-
     }
 
-    static class TagValue {
+    static class TagValue implements Comparable<TagValue>{
         private int start;
         private String value;
 
@@ -94,8 +93,13 @@ public class StupidTags {
             this.start = start;
             this.value = value;
         }
-    }
 
+
+        @Override
+        public int compareTo(TagValue o) {
+            return start;
+        }
+    }
 }
 
 
