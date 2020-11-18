@@ -14,11 +14,7 @@ public class StupidTags2 {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String file = reader.readLine();
         String line = fileToLine(file);
-//        System.out.println(line);
-//        printTags(line, tag);
         findTags(line, args[0]);
-
-
     }
 
     public static String fileToLine(String fileName) throws IOException {
@@ -46,7 +42,9 @@ public class StupidTags2 {
                 closeTag.push(matcher.end());
             }
             if (openTag.size() == closeTag.size()) {
-                System.out.println(line.substring(openTag.poll(), closeTag.pop()));
+                while (openTag.size()> 0 && closeTag.size() > 0) {
+                    System.out.println(line.substring(openTag.poll(), closeTag.pop()));
+                }
             }
         }
     }
