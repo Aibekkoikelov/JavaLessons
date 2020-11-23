@@ -55,8 +55,8 @@ public class StupidTags {
                 if (stack.size() > 1) {
                     stack.pop();
                 } else {
-                    System.out.println(stack.pop());
-                    System.out.println(t);
+                    System.out.println(stack.pop().value);
+                    System.out.println(t.value);
                     break;
                 }
             }
