@@ -10,13 +10,16 @@ import java.util.regex.Pattern;
 
 public class StupidTags {
     public static void main(String[] args) throws IOException {
-        String tag = args[0];
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String file = reader.readLine();
+        reader.close();
         String line = fileToLine(file);
-//        System.out.println(line);
-//        printTags(line, tag);
-        findTags(line, args[0]);
+        List<Tag> list = findTags(line, args[0]);
+        List<TagValue> taglist = findFirstTag(line, list);
+        Collections.sort(taglist);
+        for (TagValue t : taglist) {
+            System.out.println(t.value);
+        }
     }
 
     public static String fileToLine(String fileName) throws IOException {
@@ -43,25 +46,22 @@ public class StupidTags {
             list.add(fag);
         }
         return list;
-
     }
 
-    public static String findFirstTag(String line, List<Tag> tags) {
+
+    public static List<TagValue> findFirstTag(String line, List<Tag> tags) {
         Stack<Tag> stack = new Stack<>();
+        List<TagValue> values = new ArrayList<>();
         for (Tag t : tags) {
             if (!t.isClosing()) {
                 stack.push(t);
             } else {
-                if (stack.size() > 1) {
-                    stack.pop();
-                } else {
-                    System.out.println(stack.pop().value);
-                    System.out.println(t.value);
-                    break;
-                }
+                Tag start = stack.pop();
+                String value = line.substring(start.start, t.end);
+                values.add(new TagValue(start.start, value));
             }
         }
-        return null;
+        return values;
     }
 
     static class Tag {
@@ -80,9 +80,23 @@ public class StupidTags {
         public boolean isClosing() {
             return value.startsWith("</");
         }
-
     }
 
+    static class TagValue implements Comparable<TagValue>{
+        private int start;
+        private String value;
+
+        public TagValue(int start, String value) {
+            this.start = start;
+            this.value = value;
+        }
+
+
+        @Override
+        public int compareTo(TagValue o) {
+           return Integer.compare(start, o.start);
+        }
+    }
 }
 
 
