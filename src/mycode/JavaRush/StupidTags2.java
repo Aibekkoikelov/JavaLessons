@@ -10,7 +10,6 @@ import java.util.regex.Pattern;
 
 public class StupidTags2 {
     public static void main(String[] args) throws IOException {
-        String tag = args[0];
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String file = reader.readLine();
         String line = fileToLine(file);
