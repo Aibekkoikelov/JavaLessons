@@ -33,7 +33,6 @@ public class StupidTags {
         return sb.toString();
     }
 
-
     public static List<Tag> findTags(String line, String tag) {
 
         Pattern pattern = Pattern.compile("</?" + tag + ".*?>");
@@ -42,12 +41,10 @@ public class StupidTags {
 
         while (matcher.find()) {
             Tag fag = new Tag(matcher.start(), matcher.end(), line);
-//            System.out.println(fag.value);
             list.add(fag);
         }
         return list;
     }
-
 
     public static List<TagValue> findFirstTag(String line, List<Tag> tags) {
         Stack<Tag> stack = new Stack<>();
@@ -82,7 +79,7 @@ public class StupidTags {
         }
     }
 
-    static class TagValue implements Comparable<TagValue>{
+    static class TagValue implements Comparable<TagValue> {
         private int start;
         private String value;
 
@@ -91,10 +88,9 @@ public class StupidTags {
             this.value = value;
         }
 
-
         @Override
         public int compareTo(TagValue o) {
-           return Integer.compare(start, o.start);
+            return Integer.compare(start, o.start);
         }
     }
 }
