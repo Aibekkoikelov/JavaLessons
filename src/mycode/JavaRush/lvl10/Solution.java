@@ -84,11 +84,15 @@ public class Solution {
             //implement this method - реализуйте этот метод
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             String line = reader.readLine();
+            reader.close();
+            System.out.println(line);
             String[] lineArr = line.split(";");
             String[] assetsArr = lineArr[1].trim().split(":");
             System.out.println(Arrays.toString(assetsArr));
             Asset ass1 = new Asset(assetsArr[0], Double.parseDouble(assetsArr[1]));
+            System.out.println(ass1.toString());
             Asset ass2 = new Asset(assetsArr[2], Double.parseDouble(assetsArr[3]));
+            System.out.println(ass2.toString());
             new Human(lineArr[0],ass1, ass2);
         }
     }
