@@ -25,10 +25,7 @@ public class Solution {
             somePerson.load(inputStream);
             inputStream.close();
             //check here that ivanov equals to somePerson - проверьте тут, что ivanov и somePerson равны
-//            if (ivanov.equals(somePerson)) {
-//
-//            }
-
+            System.out.println(ivanov.equals(somePerson));
 
         } catch (IOException e) {
             //e.printStackTrace();
