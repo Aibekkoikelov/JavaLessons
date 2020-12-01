@@ -79,13 +79,20 @@ public class Solution {
                 sb.append(assets.get(i).getName() + ":");
                 sb.append(assets.get(i).getPrice() + ":");
             }
-            String str = sb.toString();
-            System.out.println(str);
+//            System.out.println(sb.toString());
+            outputStream.write(sb.toString().getBytes());
         }
 
         public void load(InputStream inputStream) throws Exception {
             //implement this method - реализуйте этот метод
-            inputStream.read();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            String line = reader.readLine();
+            String[] lineArr = line.split(";");
+            String[] assetsArr = lineArr[1].trim().split(":");
+            System.out.println(Arrays.toString(assetsArr));
+            Asset ass1 = new Asset(assetsArr[0], Double.parseDouble(assetsArr[1]));
+            Asset ass2 = new Asset(assetsArr[2], Double.parseDouble(assetsArr[3]));
+            new Human(lineArr[0],ass1, ass2);
         }
     }
 }
