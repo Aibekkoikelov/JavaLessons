@@ -13,7 +13,7 @@ public class Solution {
     public static void main(String[] args) {
         //исправьте outputStream/inputStream в соответствии с путем к вашему реальному файлу
         try {
-            File your_file_name = File.createTempFile("1", null);
+            File your_file_name = File.createTempFile("123", ".txt");
             OutputStream outputStream = new FileOutputStream(your_file_name);
             InputStream inputStream = new FileInputStream(your_file_name);
 
@@ -28,7 +28,6 @@ public class Solution {
 //            if (ivanov.equals(somePerson)) {
 //
 //            }
-
 
 
         } catch (IOException e) {
@@ -74,9 +73,14 @@ public class Solution {
 
         public void save(OutputStream outputStream) throws Exception {
             //implement this method - реализуйте этот метод
-            if (assets.isEmpty()) {
-
-            } else ;
+            StringBuilder sb = new StringBuilder();
+            sb.append(name + ";");
+            for (int i = 0; i < assets.size(); i++) {
+                sb.append(assets.get(i).getName() + ":");
+                sb.append(assets.get(i).getPrice() + ":");
+            }
+            String str = sb.toString();
+            System.out.println(str);
         }
 
         public void load(InputStream inputStream) throws Exception {
