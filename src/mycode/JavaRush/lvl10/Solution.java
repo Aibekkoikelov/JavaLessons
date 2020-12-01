@@ -24,6 +24,7 @@ public class Solution {
             Human somePerson = new Human();
             somePerson.load(inputStream);
             inputStream.close();
+//            Human somePerson =  new Human("Ivanov", new Asset("home", 999999.99), new Asset("car", 2999.99));
             //check here that ivanov equals to somePerson - проверьте тут, что ivanov и somePerson равны
             System.out.println(ivanov.equals(somePerson));
 
@@ -74,26 +75,23 @@ public class Solution {
             sb.append(name + ";");
             for (int i = 0; i < assets.size(); i++) {
                 sb.append(assets.get(i).getName() + ":");
-                sb.append(assets.get(i).getPrice() + ":");
+                sb.append(assets.get(i).getPrice() + ";");
             }
-//            System.out.println(sb.toString());
             outputStream.write(sb.toString().getBytes());
         }
 
         public void load(InputStream inputStream) throws Exception {
             //implement this method - реализуйте этот метод
+            ArrayList<Asset> assetList = new ArrayList<>();
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             String line = reader.readLine();
             reader.close();
-            System.out.println(line);
             String[] lineArr = line.split(";");
-            String[] assetsArr = lineArr[1].trim().split(":");
-            System.out.println(Arrays.toString(assetsArr));
-            Asset ass1 = new Asset(assetsArr[0], Double.parseDouble(assetsArr[1]));
-            System.out.println(ass1.toString());
-            Asset ass2 = new Asset(assetsArr[2], Double.parseDouble(assetsArr[3]));
-            System.out.println(ass2.toString());
-            new Human(lineArr[0],ass1, ass2);
+            for (int i = 1; i < lineArr.length; i++) {
+                String[] pair = lineArr[i].split(":");
+                assetList.add(new Asset(pair[0], Double.parseDouble(pair[1])));
+            }
+            new Human(lineArr[0], assetList.toArray(Asset[]::new));
         }
     }
 }
