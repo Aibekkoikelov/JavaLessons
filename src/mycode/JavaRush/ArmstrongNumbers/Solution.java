@@ -23,6 +23,8 @@ public class Solution {
         for (long i = 1; i < N; i++) {
             long originalNumber, remainder, res = 0;
             long p = numbers(i);
+//            long p = String.valueOf(i).length();
+//            long p = (long)(Math.log10(i) + 1);
             originalNumber = i;
             for (; originalNumber != 0; originalNumber /= 10) {
                 remainder = originalNumber % 10;
@@ -77,7 +79,7 @@ public class Solution {
         System.out.println("time = " + (b - a) / 1000);
 
         a = System.currentTimeMillis();
-        System.out.println(Arrays.toString(getNumbers(1000000000)));
+        System.out.println(Arrays.toString(getNumbers(1000000000L)));
         b = System.currentTimeMillis();
         System.out.println("memory " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / (8 * 1024));
         System.out.println("time = " + (b - a) / 1000);
