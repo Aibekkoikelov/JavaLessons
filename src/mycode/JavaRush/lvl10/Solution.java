@@ -91,7 +91,8 @@ public class Solution {
                 String[] pair = lineArr[i].split(":");
                 assetList.add(new Asset(pair[0], Double.parseDouble(pair[1])));
             }
-            new Human(lineArr[0], assetList.toArray(Asset[]::new));
+            this.name = lineArr[0];
+            this.assets = assetList;
         }
     }
 }
