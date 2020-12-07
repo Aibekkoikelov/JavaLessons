@@ -62,9 +62,11 @@ public class Solution {
             if (n >= MULTIPLIERS[i]) {
                 numCount = i + 1;
                 return numCount;
+            } else {
+                return numCount;
             }
         }
-        return 0;
+        return numCount;
     }
 
 
