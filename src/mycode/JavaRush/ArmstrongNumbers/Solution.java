@@ -33,7 +33,7 @@ public class Solution {
                 list.add(i);
             }
         }
-//
+
         int k = list.size();
         result = new long[k];
 
@@ -43,7 +43,6 @@ public class Solution {
         return result;
     }
 
-    //
     static long power(long x, long y) {
         long temp;
         if (y == 0) {
