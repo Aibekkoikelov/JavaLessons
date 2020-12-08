@@ -100,6 +100,37 @@ same - (1, 1) - (4, 1)
         }
     }
 
+    public static Word plusVertical(int i, int j, int wordLength, int[][] crossword) {
+        Word word;
+        if (j + wordLength < crossword[i].length) {
+            String word1 = "";
+            for (int p = j; p < (j + wordLength); p++) {
+                word1 += (char) crossword[i][p];
+            }
+            word = new Word(word1);
+            word.setStartPoint(i, j);
+            word.setEndPoint(i, j + wordLength);
+            return word;
+        } else {
+            return null;
+        }
+    }
+
+    public static Word minusVertical(int i, int j, int wordLength, int[][] crossword) {
+        Word word;
+        if (j - wordLength <= 0) {
+            String word1 = "";
+            for (int p = j; p > (j - wordLength); p--) {
+                word1 += (char) crossword[i][p];
+            }
+            word = new Word(word1);
+            word.setStartPoint(i, j);
+            word.setEndPoint(i, j - wordLength);
+            return word;
+        } else {
+            return null;
+        }
+    }
 
 
 
