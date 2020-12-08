@@ -64,19 +64,25 @@ same - (1, 1) - (4, 1)
         for (String word : list) {
 
         }
+        return list;
     }
 
 
-    public static List<String> getWords(int i, int j, int wordLength, int[][] crossword) {
-        List<String> listOfAllWords = new ArrayList<>();
+    public static Word getWords(int i, int j, int wordLength, int[][] crossword) {
+        Word word;
         if (i + wordLength < crossword.length) {
             String word1 = "";
             for (int p = i; p < (i + wordLength); p++) {
                 word1 += (char) crossword[p][j];
             }
-            listOfAllWords.add(word1);
+            word = new Word(word1);
+            word.setStartPoint(i, j);
+            word.setEndPoint(i + wordLength, j);
+
+        } else {
+            return null;
         }
-        return listOfAllWords;
+        return word;
     }
 
 
