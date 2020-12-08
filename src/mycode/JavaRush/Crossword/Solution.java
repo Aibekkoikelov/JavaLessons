@@ -35,24 +35,50 @@ same - (1, 1) - (4, 1)
 
     public static List<Word> detectAllWords(int[][] crossword, String... words) {
         List<Word> list = new ArrayList<>();
+        List<String> listOfWords = new ArrayList<>();
 
         for (int i = 0; i < crossword.length; i++) {
             for (int j = 0; j < crossword[i].length; j++) {
-                findLetter((char) crossword[i][j], words);
+                listOfWords = findLetter((char) crossword[i][j], words);
+
+            }
+        }
+
+
+        return list;
+    }
+
+    public static List<String> findLetter(char firstChar, String[] words) {
+        List<String> list = new ArrayList<>();
+        for (int k = 0; k < words.length; k++) {
+            if (words[k].charAt(0) == firstChar) {
+                list.add(words[k]);
 
             }
         }
         return list;
     }
 
-    public static void findLetter(char firstChar, String[] words) {
-        List<String> list = new ArrayList<>();
-        for (int k = 0; k < words.length; k++) {
-            if (words[k].charAt(0) == firstChar) {
-                list.add(words[k]);
-            }
+    public static List<Word> findAllWords(List<String> list, int[][] crossword, int i, int j, int wordLength) {
+        List<String> listOfAllWords = new ArrayList<>();
+        for (String word : list) {
+
         }
     }
+
+
+    public static List<String> getWords(int i, int j, int wordLength, int[][] crossword) {
+        List<String> listOfAllWords = new ArrayList<>();
+        if (i + wordLength < crossword.length) {
+            String word1 = "";
+            for (int p = i; p < (i + wordLength); p++) {
+                word1 += (char) crossword[p][j];
+            }
+            listOfAllWords.add(word1);
+        }
+        return listOfAllWords;
+    }
+
 
     public static class Word {
 
