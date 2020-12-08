@@ -68,7 +68,7 @@ same - (1, 1) - (4, 1)
     }
 
 
-    public static Word getWords(int i, int j, int wordLength, int[][] crossword) {
+    public static Word plusHorizontal(int i, int j, int wordLength, int[][] crossword) {
         Word word;
         if (i + wordLength < crossword.length) {
             String word1 = "";
@@ -78,11 +78,10 @@ same - (1, 1) - (4, 1)
             word = new Word(word1);
             word.setStartPoint(i, j);
             word.setEndPoint(i + wordLength, j);
-
+            return word;
         } else {
             return null;
         }
-        return word;
     }
 
 
