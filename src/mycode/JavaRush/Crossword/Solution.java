@@ -38,14 +38,14 @@ same - (1, 1) - (4, 1)
 
         for (int i = 0; i < crossword.length; i++) {
             for (int j = 0; j < crossword[i].length; j++) {
-                findLetter((char) crossword[i][j]);
+                findLetter((char) crossword[i][j], words);
 
             }
         }
         return list;
     }
 
-    public static void findLetter(char firstChar, String... words) {
+    public static void findLetter(char firstChar, String[] words) {
         List<String> list = new ArrayList<>();
         for (int k = 0; k < words.length; k++) {
             if (words[k].charAt(0) == firstChar) {
