@@ -40,7 +40,7 @@ same - (1, 1) - (4, 1)
         for (int i = 0; i < crossword.length; i++) {
             for (int j = 0; j < crossword[i].length; j++) {
                 listOfWords = findLetter((char) crossword[i][j], words);
-
+                findAllWords(listOfWords, crossword, i , j);
             }
         }
 
@@ -59,12 +59,12 @@ same - (1, 1) - (4, 1)
         return list;
     }
 
-    public static List<Word> findAllWords(List<String> list, int[][] crossword, int i, int j, int wordLength) {
-        List<String> listOfAllWords = new ArrayList<>();
+    public static List<Word> findAllWords(List<String> list, int[][] crossword, int i, int j) {
+        List<Word> listOfAllWords = new ArrayList<>();
         for (String word : list) {
-
+            listOfAllWords = findLetter((char) crossword[i][j], words);
         }
-        return list;
+        return listOfAllWords;
     }
 
 
@@ -131,7 +131,6 @@ same - (1, 1) - (4, 1)
             return null;
         }
     }
-
 
 
     public static class Word {
