@@ -18,12 +18,16 @@ public class Solution {
 //        };
         int[][] crossword = new int[][]{
                 {'a', 'd', 's', 'r', 'l', 'k'},
-                {'s', 'a', 'a', 'a', 'e', 'o'},
-                {'l', 'n', 'm', 'r', 'o', 'v'},
-                {'m', 'l', 'p', 'e', 'r', 'h'},
-                {'p', 'o', 's', 'a', 'e', 'e'}
+                {'s', 'h', 'a', 'a', 'e', 'o'},
+                {'l', 'o', 'm', 'r', 'o', 'v'},
+                {'m', 'm', 'p', 'e', 'r', 'h'},
+                {'p', 'e', 's', 'a', 'm', 'e'}
         };
-        detectAllWords(crossword, "home", "same");
+        List<Word> list = detectAllWords(crossword, "home", "same");
+        for (Word w : list) {
+            System.out.println(w);
+        }
+
 
         /*
 
@@ -35,16 +39,22 @@ same - (1, 1) - (4, 1)
 
     public static List<Word> detectAllWords(int[][] crossword, String... words) {
         List<Word> list = new ArrayList<>();
-        List<String> listOfWords = new ArrayList<>();
-
         for (int i = 0; i < crossword.length; i++) {
             for (int j = 0; j < crossword[i].length; j++) {
-                listOfWords = findLetter((char) crossword[i][j], words);
-                findAllWords(listOfWords, crossword, i, j);
+
+                for (String word : findLetter((char) crossword[i][j], words)) {
+                    Word woord = plusHorizontal(i, j, word.length(), crossword);
+                    if (woord != null && word.equals(woord.text))
+                    {
+                        list.add(woord);
+                    }
+                    plusHorizontal(i, j, word.length(), crossword);
+                    minusHorizontal(i, j, word.length(), crossword);
+                    plusVertical(i, j, word.length(), crossword);
+                    minusVertical(i, j, word.length(), crossword);
+                }
             }
         }
-
-
         return list;
     }
 
@@ -59,63 +69,13 @@ same - (1, 1) - (4, 1)
         return list;
     }
 
-    public static List<Word> findAllWords(List<String> list, int[][] crossword, int i, int j) {
-        List<Word> listOfAllWords = new ArrayList<>();
-        Word woord;
-        for (String word : list) {
-             woord = plusHorizontal(i, j, word.length(), crossword);
-            if (woord != null && word.equals(woord.text))
-            {
-                listOfAllWords.add(woord);
-            }
-            plusHorizontal(i, j, word.length(), crossword);
-            minusHorizontal(i, j, word.length(), crossword);
-            plusVertical(i, j, word.length(), crossword);
-            minusVertical(i, j, word.length(), crossword);
-        }
-        return listOfAllWords;
-    }
-
-
     public static Word plusHorizontal(int i, int j, int wordLength, int[][] crossword) {
-        Word word;
-        if (i + wordLength < crossword.length) {
-            String word1 = "";
-            for (int p = i; p < (i + wordLength); p++) {
-                word1 += (char) crossword[p][j];
-            }
-            word = new Word(word1);
-            word.setStartPoint(i, j);
-            word.setEndPoint(i + wordLength, j);
-            return word;
-        } else {
-            return null;
-        }
-    }
-
-    public static Word minusHorizontal(int i, int j, int wordLength, int[][] crossword) {
-        Word word;
-        if (i - wordLength >= 0) {
-            String word1 = "";
-            for (int p = i; p > (i - wordLength); p--) {
-                word1 += (char) crossword[p][j];
-            }
-            word = new Word(word1);
-            word.setStartPoint(i, j);
-            word.setEndPoint(i - wordLength, j);
-            return word;
-        } else {
-            return null;
-        }
-    }
-
-    public static Word plusVertical(int i, int j, int wordLength, int[][] crossword) {
-        Word word;
         if (j + wordLength < crossword[i].length) {
             String word1 = "";
             for (int p = j; p < (j + wordLength); p++) {
                 word1 += (char) crossword[i][p];
             }
+            Word word;
             word = new Word(word1);
             word.setStartPoint(i, j);
             word.setEndPoint(i, j + wordLength);
@@ -125,16 +85,48 @@ same - (1, 1) - (4, 1)
         }
     }
 
-    public static Word minusVertical(int i, int j, int wordLength, int[][] crossword) {
-        Word word;
-        if (j - wordLength <= 0) {
+    public static Word minusHorizontal(int i, int j, int wordLength, int[][] crossword) {
+        if (j - wordLength >= 0) {
             String word1 = "";
-            for (int p = j; p > (j - wordLength); p--) {
+            for (int p = i; p > (j - wordLength); p--) {
                 word1 += (char) crossword[i][p];
             }
+            Word word;
             word = new Word(word1);
             word.setStartPoint(i, j);
             word.setEndPoint(i, j - wordLength);
+            return word;
+        } else {
+            return null;
+        }
+    }
+
+    public static Word plusVertical(int i, int j, int wordLength, int[][] crossword) {
+        if (i + wordLength < crossword.length) {
+            String word1 = "";
+            for (int p = i; p < (i + wordLength); p++) {
+                word1 += (char) crossword[p][j];
+            }
+            Word word;
+            word = new Word(word1);
+            word.setStartPoint(i, j);
+            word.setEndPoint(i + wordLength, j);
+            return word;
+        } else {
+            return null;
+        }
+    }
+
+    public static Word minusVertical(int i, int j, int wordLength, int[][] crossword) {
+        if (i - wordLength >= 0) {
+            String word1 = "";
+            for (int p = i; p > (i - wordLength); p--) {
+                word1 += (char) crossword[p][j];
+            }
+            Word word;
+            word = new Word(word1);
+            word.setStartPoint(i, j);
+            word.setEndPoint(i - wordLength, j);
             return word;
         } else {
             return null;
