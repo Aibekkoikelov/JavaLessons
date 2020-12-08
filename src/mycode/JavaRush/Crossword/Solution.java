@@ -84,6 +84,24 @@ same - (1, 1) - (4, 1)
         }
     }
 
+    public static Word minusHorizontal(int i, int j, int wordLength, int[][] crossword) {
+        Word word;
+        if (i - wordLength >= 0) {
+            String word1 = "";
+            for (int p = i; p > (i - wordLength); p--) {
+                word1 += (char) crossword[p][j];
+            }
+            word = new Word(word1);
+            word.setStartPoint(i, j);
+            word.setEndPoint(i - wordLength, j);
+            return word;
+        } else {
+            return null;
+        }
+    }
+
+
+
 
     public static class Word {
 
