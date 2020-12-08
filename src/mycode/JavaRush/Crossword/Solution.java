@@ -23,10 +23,7 @@ public class Solution {
                 {'m', 'l', 'p', 'e', 'r', 'h'},
                 {'p', 'o', 's', 'a', 'e', 'e'}
         };
-        List<Word> list = detectAllWords(crossword, "home", "same");
-        for (Word words : list) {
-            System.out.println(words.toString());
-        }
+        detectAllWords(crossword, "home", "same");
 
         /*
 
@@ -40,60 +37,21 @@ same - (1, 1) - (4, 1)
         List<Word> list = new ArrayList<>();
 
         for (int i = 0; i < crossword.length; i++) {
-            String word = "";
             for (int j = 0; j < crossword[i].length; j++) {
-                word += (char) crossword[i][j];
-            }
-            for (int k = 0; k < words.length; k++) {
-                if (word.contains(words[k])) {
-                    int startX = word.indexOf(words[k]);
-                    int startY = i;
-                    int endX = word.indexOf(words[k]) + words[k].length() - 1;
-                    int endY = i;
-                    list.add(new Word(words[k], startX, startY, endX, endY));
-                }
+                findLetter((char) crossword[i][j]);
+
             }
         }
-
-        for (int i = 0; i < crossword.length; i++) {
-            String word = "";
-            for (int j = crossword[i].length - 1; j >= 0; j--) {
-                word += (char) crossword[i][j];
-            }
-            for (int k = 0; k < words.length; k++) {
-                if (word.contains(words[k])) {
-                    int startX = word.indexOf(words[k]);
-                    int startY = i;
-                    int endX = word.indexOf(words[k]) + words[k].length() - 1;
-                    int endY = i;
-                    list.add(new Word(words[k], startX, startY, endX, endY));
-                }
-            }
-        }
-
-        for (int i = 0; i < crossword.length; i++) {
-            int p = i;
-            String word = "";
-            for (int j = 0; j < crossword[i].length && p < crossword.length;  j++, p++) {
-                word += (char) crossword[p][j];
-            }
-            for (int k = 0; k < words.length; k++) {
-                if (word.contains(words[k])) {
-                    int startX = word.indexOf(words[k]);
-                    int startY = i;
-                    int endX = word.indexOf(words[k]) + words[k].length() - 1;
-                    int endY = i;
-                    list.add(new Word(words[k], startX, startY, endX, endY));
-                }
-            }
-        }
-
-
-
-
-//        list.add(new Word ("same", 5, 3, 2, 0));
-
         return list;
+    }
+
+    public static void findLetter(char firstChar, String... words) {
+        List<String> list = new ArrayList<>();
+        for (int k = 0; k < words.length; k++) {
+            if (words[k].charAt(0) == firstChar) {
+                list.add(words[k]);
+            }
+        }
     }
 
     public static class Word {
@@ -106,13 +64,13 @@ same - (1, 1) - (4, 1)
         private int endX;
         private int endY;
 
-        public Word(String text, int startX, int startY, int endX, int endY) {
-            this.text = text;
-            this.startX = startX;
-            this.startY = startY;
-            this.endX = endX;
-            this.endY = endY;
-        }
+//        public Word(String text, int startX, int startY, int endX, int endY) {
+//            this.text = text;
+//            this.startX = startX;
+//            this.startY = startY;
+//            this.endX = endX;
+//            this.endY = endY;
+//        }
 
         public Word(String text) {
             this.text = text;

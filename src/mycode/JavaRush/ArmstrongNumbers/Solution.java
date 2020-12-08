@@ -10,6 +10,7 @@ import java.util.List;
 
 public class Solution {
 
+
     private static final long[] MULTIPLIERS = new long[]{1L, 10L, 100L, 1000L, 10000L, 100000L, 1000000L, 10000000L, 100000000L, 1000000000L, 10000000000L, 100000000000L, 1000000000000L, 10000000000000L, 100000000000000L, 1000000000000000L, 10000000000000000L, 100000000000000000L, 1000000000000000000L};
     private static int numCount = 0;
 
@@ -19,6 +20,8 @@ public class Solution {
         if (N < 1) {
             return result;
         }
+
+
 
         for (long i = 1; i < N; i++) {
             long originalNumber, remainder, res = 0;
