@@ -52,7 +52,6 @@ public class TreeOfFiles {
 
     public static void writeToFile(File file, List<File> list) throws IOException {
 
-//        FileWriter fileWriter = new FileWriter(file);
         FileOutputStream fos = new FileOutputStream(file, true);
 
         for (File fl : list) {
