@@ -15,7 +15,7 @@ public class TreeOfFiles {
 
         File source = new File(args[1]);
         File dest = new File(source.getParent() + "/allFilesContent.txt");
-        FileUtils.renameFile(source, dest);
+        Files.move(source.toPath(), dest.toPath());
 
 
         List<File> listOfFiles = listOfFiles(path);
