@@ -1,38 +1,37 @@
 package mycode.JavaRush.lvl102;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 
 public class Repacking {
-    private static Map<String, ByteArrayOutputStream> map = new HashMap<>();
+    private static Map<String, byte[]> map = new HashMap<>();
 
     public static void main(String[] args) {
-        String file = "E:\\archive.zip";
-        zipToMap(file);
+        String archiveName = "E:\\archive.zip";
+        String file = "deleted.txt";
+        zipToMap(archiveName, file);
+
     }
 
-    public static void zipToMap (String fileName) {
+    public static void zipToMap(String archive, String file) {
         try (ZipInputStream zin = new ZipInputStream(new FileInputStream("E:\\archive.zip"))) {
             ZipEntry entry;
-            String name;
-            byte[] buffer = new byte[4096];
             while ((entry = zin.getNextEntry()) != null) {
+                String name;
                 name = entry.getName();
-                BufferedInputStream bis = new BufferedInputStream(new FileInputStream(entry.getName()));
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                int bytes = 0;
-                while ((bytes = bis.read(buffer, 0, buffer.length)) > 0) {
-                    baos.write(buffer, 0, bytes);
+                if (name.contains(file)) {
+                } else {
+                    InputStream inputStream = new FileInputStream(name);
+                    byte[] fileContent = inputStream.readAllBytes();
+                    map.put(name, fileContent);
+                    zin.closeEntry();
                 }
-                map.put(name, baos);
-                baos.close();
-                zin.closeEntry();
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
