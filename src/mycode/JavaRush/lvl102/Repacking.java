@@ -29,6 +29,7 @@ public class Repacking {
                     InputStream inputStream = new FileInputStream(name);
                     byte[] fileContent = inputStream.readAllBytes();
                     map.put(name, fileContent);
+                    inputStream.close();
                     zin.closeEntry();
                 }
             }
