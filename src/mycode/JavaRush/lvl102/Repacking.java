@@ -24,8 +24,10 @@ public class Repacking {
             while ((entry = zin.getNextEntry()) != null) {
                 String name;
                 name = entry.getName();
-                if (name.contains(file)) {
-                } else {
+
+                if (entry.isDirectory()) {
+                    map.put(name, null);
+                } else if (!name.contains(file)) {
                     InputStream inputStream = new FileInputStream(name);
                     byte[] fileContent = inputStream.readAllBytes();
                     map.put(name, fileContent);
