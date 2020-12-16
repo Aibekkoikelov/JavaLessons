@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
+import java.util.zip.ZipOutputStream;
 
 public class Repacking {
     private static Map<String, byte[]> map = new HashMap<>();
@@ -15,30 +16,54 @@ public class Repacking {
         String archiveName = "E:\\archive.zip";
         String file = "deleted.txt";
         zipToMap(archiveName, file);
+        mapToZip(archiveName, file);
+
+    }
+
+    private static void mapToZip(String archiveName, String file) {
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(archiveName);
+            ZipOutputStream zip = new ZipOutputStream(fos);
+            for (Map.Entry<String, byte[]> entry : map.entrySet()) {
+                String name = entry.getKey();
+                byte[] content = entry.getValue();
+                zip.putNextEntry(new ZipEntry(name));
+                zip.write(content);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ZipOutputStream zipOut = new ZipOutputStream(fos);
 
     }
 
     public static void zipToMap(String archive, String file) {
-        try (ZipInputStream zin = new ZipInputStream(new FileInputStream("E:\\archive.zip"))) {
+        try (ZipInputStream zin = new ZipInputStream(new FileInputStream(archive))) {
             ZipEntry entry;
             while ((entry = zin.getNextEntry()) != null) {
-                String name;
-                name = entry.getName();
-
+                String name = entry.getName();
                 if (entry.isDirectory()) {
-                    map.put(name, null);
+                    map.put(name, new byte[0]);
                 } else if (!name.contains(file)) {
-                    InputStream inputStream = new FileInputStream(name);
-                    byte[] fileContent = inputStream.readAllBytes();
-                    map.put(name, fileContent);
-                    inputStream.close();
+                    byte[] entryContent = new byte[(int) entry.getSize()];
+                    zin.read(entryContent);
+                    map.put(name, entryContent);
                     zin.closeEntry();
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(map.toString());
-        System.out.println(map.size());
+        for (Map.Entry<String, byte[]> e : map.entrySet()) {
+            System.out.println(e.getKey());
+            System.out.println(new String(e.getValue()));
+        }
     }
+    
+    
+    
+    
 }
