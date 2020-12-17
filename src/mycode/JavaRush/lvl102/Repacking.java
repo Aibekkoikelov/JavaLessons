@@ -20,7 +20,6 @@ public class Repacking {
 
         zipToMap(archiveName, newFile);
         mapToZip(archiveName, newFile);
-
     }
 
     private static void mapToZip(String archiveName, String file) {
