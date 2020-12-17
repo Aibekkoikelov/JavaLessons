@@ -18,7 +18,6 @@ public class Repacking {
         File file = new File(args[0]);
         String newFile = file.getName();
 
-
         zipToMap(archiveName, newFile);
         mapToZip(archiveName, newFile);
 
