@@ -13,31 +13,31 @@ public class Repacking {
     private static Map<String, byte[]> map = new HashMap<>();
 
     public static void main(String[] args) {
-        String archiveName = "E:\\archive.zip";
-        String file = "deleted.txt";
-        zipToMap(archiveName, file);
-        mapToZip(archiveName, file);
+        String archiveName = args[1];
+//        String file = args[0];
+        File file = new File(args[0]);
+        String newFile = file.getName();
+
+
+        zipToMap(archiveName, newFile);
+        mapToZip(archiveName, newFile);
 
     }
 
     private static void mapToZip(String archiveName, String file) {
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(archiveName);
-            ZipOutputStream zip = new ZipOutputStream(fos);
+        try(ZipOutputStream zip = new ZipOutputStream(new FileOutputStream(archiveName))) {
             for (Map.Entry<String, byte[]> entry : map.entrySet()) {
                 String name = entry.getKey();
                 byte[] content = entry.getValue();
                 zip.putNextEntry(new ZipEntry(name));
                 zip.write(content);
+                zip.closeEntry();
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ZipOutputStream zipOut = new ZipOutputStream(fos);
-
     }
 
     public static void zipToMap(String archive, String file) {
