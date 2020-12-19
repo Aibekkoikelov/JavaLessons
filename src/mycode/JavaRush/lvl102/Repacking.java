@@ -36,8 +36,6 @@ public class Repacking {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ZipOutputStream zipOut = new ZipOutputStream(fos);
-
     }
 
     public static void zipToMap(String archive, String file) {
