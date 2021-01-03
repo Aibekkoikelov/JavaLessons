@@ -1,6 +1,6 @@
 package main.java.com.javalessons.oop;
 
-class Cat {
+final class  Cat {
 
     String name;
     int age;
