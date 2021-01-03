@@ -12,24 +12,38 @@ import java.util.zip.ZipOutputStream;
 public class Repacking {
     private static Map<String, byte[]> map = new HashMap<>();
 
-    public static void main(String[] args) {
-        String archiveName = "E:\\archive.zip";
-        String file = "deleted.txt";
-        zipToMap(archiveName, file);
-        mapToZip(archiveName, file);
+    public static void main(String[] args) throws IOException {
 
+        zipToMap(args[1]);
+
+        FileOutputStream fos = new FileOutputStream(args[1]);
+        ZipOutputStream zipOutputStream = new ZipOutputStream(fos);
+
+        File file = new File(args[0]);
+        zipOutputStream.putNextEntry(new ZipEntry("new/" + file.getName()));
+        Files.copy(file.toPath(), zipOutputStream);
+
+        for (Map.Entry<String, byte[]> e : map.entrySet()) {
+            System.out.println(e.getKey());
+            System.out.println(new String(e.getValue()));
+            if (!e.equals("new/" + file.getName())) {
+                ZipEntry zipEntry = new ZipEntry(e.getKey());
+                zipOutputStream.putNextEntry(zipEntry);
+                zipOutputStream.write(e.getValue());
+                zipOutputStream.closeEntry();
+            }
+        }
+        zipOutputStream.close();
     }
 
-    private static void mapToZip(String archiveName, String file) {
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(archiveName);
-            ZipOutputStream zip = new ZipOutputStream(fos);
+    private static void mapToZip(String archiveName) {
+        try (ZipOutputStream zip = new ZipOutputStream(new FileOutputStream(archiveName))) {
             for (Map.Entry<String, byte[]> entry : map.entrySet()) {
                 String name = entry.getKey();
                 byte[] content = entry.getValue();
                 zip.putNextEntry(new ZipEntry(name));
                 zip.write(content);
+                zip.closeEntry();
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -38,30 +52,19 @@ public class Repacking {
         }
     }
 
-    public static void zipToMap(String archive, String file) {
+    public static void zipToMap(String archive) throws IOException {
         try (ZipInputStream zin = new ZipInputStream(new FileInputStream(archive))) {
             ZipEntry entry;
+            byte[] buffer = new byte[1024];
             while ((entry = zin.getNextEntry()) != null) {
-                String name = entry.getName();
-                if (entry.isDirectory()) {
-                    map.put(name, new byte[0]);
-                } else if (!name.contains(file)) {
-                    byte[] entryContent = new byte[(int) entry.getSize()];
-                    zin.read(entryContent);
-                    map.put(name, entryContent);
-                    zin.closeEntry();
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                int length;
+                while ((length = zin.read(buffer)) > 0) {
+                    outputStream.write(buffer, 0, length);
                 }
+                map.put(entry.getName(), outputStream.toByteArray());
+                zin.closeEntry();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        for (Map.Entry<String, byte[]> e : map.entrySet()) {
-            System.out.println(e.getKey());
-            System.out.println(new String(e.getValue()));
         }
     }
-    
-    
-    
-    
 }
