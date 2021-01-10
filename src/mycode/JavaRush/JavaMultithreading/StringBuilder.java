@@ -23,15 +23,15 @@ public class StringBuilder {
             System.out.println("Error accessing input file!");
         }
         Set<String> set = new HashSet<>();
-        for (String str : words) {
-            String reverse = new StringBuilder(str).reverse().toString();
-            if (set.contains(reverse)) {
-                result.add(new Pair(str, reverse));
-                set.remove(str);
-            } else {
-                set.add(str);
-            }
-        }
+//        for (String str : words) {
+//            String reverse = new StringBuilder(str).reverse().toString();
+//            if (set.contains(reverse)) {
+//                result.add(new Pair(str, reverse));
+//                set.remove(str);
+//            } else {
+//                set.add(str);
+//            }
+//        }
         System.out.println(result);
     }
 
